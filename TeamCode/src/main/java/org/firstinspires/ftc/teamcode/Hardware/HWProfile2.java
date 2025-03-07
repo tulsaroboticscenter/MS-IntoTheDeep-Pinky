@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class HWProfile2 {
+public class  HWProfile2 {
 
 
     /*
