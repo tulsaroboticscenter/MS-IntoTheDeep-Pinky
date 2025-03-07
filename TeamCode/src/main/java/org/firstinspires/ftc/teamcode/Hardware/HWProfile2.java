@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -69,6 +70,7 @@ public class HWProfile2 {
     public Servo servoTwist;
     public Servo servoSpice;
 
+    public GoBildaPinpointDriverRR pinpoint; // pinpoint CH i2C port 1
 
 
 
@@ -121,6 +123,9 @@ public class HWProfile2 {
             // Retrieve and initialize the IMU.
             // This sample expects the IMU to be in a REV Hub and named "imu".
             imu = ahwMap.get(IMU.class, "imu");
+            pinpoint = hwMap.get(GoBildaPinpointDriverRR.class,"pinpoint");
+            pinpoint.recalibrateIMU();
+            pinpoint.resetPosAndIMU();
 
             /* Define how the hub is mounted on the robot to get the correct Yaw, Pitch and Roll values.
              *

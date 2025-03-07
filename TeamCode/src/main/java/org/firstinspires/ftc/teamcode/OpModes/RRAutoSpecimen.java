@@ -41,6 +41,7 @@ import org.firstinspires.ftc.teamcode.Hardware.HWProfile2;
 import org.firstinspires.ftc.teamcode.Hardware.MSParams;
 import org.firstinspires.ftc.teamcode.Libs.MSMechOps;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 //@Disabled
 @Autonomous(name = "Auto - SPECIMENS", group = "Competition", preselectTeleOp = "RobotTeleOp")
@@ -63,6 +64,7 @@ public class RRAutoSpecimen extends LinearOpMode{
     public final static MSParams params = new MSParams();
     public LinearOpMode opMode = this;
     public MSMechOps mechOps;
+    PinpointDrive drive = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -75,7 +77,7 @@ public class RRAutoSpecimen extends LinearOpMode{
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
         robot.servoBar.setPosition(params.Bar_Auto);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoWrist.setPosition(params.Wrist_Auto);
+        robot.servoWrist.setPosition(params.Wrist_Box);
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoBucket.setPosition(params.Bucket_Catch);
@@ -113,29 +115,36 @@ public class RRAutoSpecimen extends LinearOpMode{
         Pose2d midwayPose2 = new Pose2d(0, 0, 0);
         Pose2d midwayPose3 = new Pose2d(0, 0, 0);
         Pose2d midwayPose4 = new Pose2d(0, 0, 0);
+        Pose2d midwayPose5 = new Pose2d(0, 0, 0);
+        Pose2d midwayPose6 = new Pose2d(0, 0, 0);
+        Pose2d midwayPose7 = new Pose2d(0, 0, 0);
+        Pose2d midwayPose8 = new Pose2d(0, 0, 0);
 
         Pose2d parkPrepPose = new Pose2d(0, 0, 0);
         Pose2d parkPose = new Pose2d(0, 0, 0);
         double waitSecondsBeforeDrop = 0;
-        MecanumDrive drive = new MecanumDrive(hardwareMap, initPose);
+        PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
 
 
-        drive = new MecanumDrive(hardwareMap, initPose);
+        drive = new PinpointDrive(hardwareMap, initPose);
 
         /*****************
          * Set values for RoadRunner Pathing
          */
-        specimenPreScoringPosition = new Pose2d(-23, -10, 0);
-        specimenScoringPosition = new Pose2d(-33, -10, 0);
-        specimenScoringSlide = new Pose2d(-33, -15, 0);
-        grabSpecimenPosition = new Pose2d(-2, 20, Math.toRadians(-180));
-        coloredSample1Position = new Pose2d(-5, 30, Math.toRadians(-90));
-        coloredSample2Position = new Pose2d(-35, -58, 90);
+        specimenPreScoringPosition = new Pose2d(-20, -10, 0);
+        specimenScoringPosition = new Pose2d(-30, -10, 0);
+        specimenScoringSlide = new Pose2d(-30, -15, 0);
+        grabSpecimenPosition = new Pose2d(-6, 26, Math.toRadians(-180));
+        midwayPose1 = new Pose2d(-20, 20, Math.toRadians(-180));//back to go for specimens
+        midwayPose2 = new Pose2d(-45, 20, Math.toRadians(-180)); // out to push samples back
+        midwayPose3 = new Pose2d(-45, 35, Math.toRadians(-180)); // out to push samples back
+        coloredSample1Position = new Pose2d(-5, 35, Math.toRadians(-180));
+        midwayPose4 = new Pose2d(-45, 35, Math.toRadians(-180)); //drop samples
+        midwayPose5 = new Pose2d(-45, 45, Math.toRadians(-180)); //moving out to to go grabSpecimenPosition
+        coloredSample2Position = new Pose2d(-5, 45, Math.toRadians(-180));
         coloredSample3Position = new Pose2d(-35, -60, Math.toRadians(90));
-        midwayPose1 = new Pose2d(-22, -22, 90); //drop samples
-        midwayPose2 = new Pose2d(-20, -47, Math.toRadians(180)); //moving out to to go grabSpecimenPosition
-        midwayPose3 = new Pose2d(-22, 15, Math.toRadians(0));//back to go for specimens
-        midwayPose4 = new Pose2d(-50, 30, Math.toRadians(-90)); // out to push samples back
+
+
 
         parkPose = new Pose2d(0, 55, Math.toRadians(-180));
 
@@ -150,7 +159,7 @@ public class RRAutoSpecimen extends LinearOpMode{
             // Drive to specimen scoring position
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            .strafeToLinearHeading(specimenPreScoringPosition.position, specimenPreScoringPosition.heading)
+                            //.strafeToLinearHeading(specimenPreScoringPosition.position, specimenPreScoringPosition.heading)
                             .strafeToLinearHeading(specimenScoringPosition.position, specimenScoringPosition.heading)
                             .build());
 
@@ -173,12 +182,14 @@ public class RRAutoSpecimen extends LinearOpMode{
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
                             .strafeToLinearHeading(specimenPreScoringPosition.position,specimenPreScoringPosition.heading)
+                            .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                            .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
                             .strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
-                            .strafeToLinearHeading(midwayPose4.position, midwayPose4.heading)
                             .strafeToLinearHeading(coloredSample1Position.position, coloredSample1Position.heading)
-//                            .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-//                            .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
-                            .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
+                            .strafeToLinearHeading(midwayPose4.position, midwayPose4.heading)
+                            .strafeToLinearHeading(midwayPose5.position, midwayPose5.heading)
+                            .strafeToLinearHeading(coloredSample2Position.position, coloredSample2Position.heading)
+            //                .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
                             .build());
             // Grab the specimen 2
 
@@ -189,7 +200,7 @@ public class RRAutoSpecimen extends LinearOpMode{
                                 .build()  );
 
             robot.servoSpice.setPosition(params.SPICE_CLOSE);
-            safeWaitSeconds(.25);
+            safeWaitSeconds(.1);
 
             mechOps.raiseLift(params.LIFT_CLIP_HIGH);
 
@@ -224,7 +235,7 @@ public class RRAutoSpecimen extends LinearOpMode{
                             .build()  );
             // Grab the specimen 3
             robot.servoSpice.setPosition(params.SPICE_CLOSE);
-            safeWaitSeconds(.25);
+            safeWaitSeconds(.1);
 
             mechOps.raiseLift(params.LIFT_CLIP_HIGH);
 
@@ -251,18 +262,45 @@ public class RRAutoSpecimen extends LinearOpMode{
                     drive.actionBuilder(drive.pose)
                             .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
                             .build());
+            Actions.runBlocking(
+                    drive.actionBuilder(drive.pose)
+                            .turnTo(Math.toRadians(-180))
+                            .lineToX(2)
+                            .build()  );
+            // Grab the specimen 3
+            robot.servoSpice.setPosition(params.SPICE_CLOSE);
+            safeWaitSeconds(.1);
+
+            mechOps.raiseLift(params.LIFT_CLIP_HIGH);
+
+
+            // Drive to specimen scoring position
+            Actions.runBlocking(
+                    drive.actionBuilder(drive.pose)
+                            .strafeToLinearHeading(specimenPreScoringPosition.position, specimenPreScoringPosition.heading)
+                            .strafeToLinearHeading(specimenScoringPosition.position, specimenScoringPosition.heading)
+                            .build());
+
+            // Score specimen
+
+            // TODO: Add code to release the sample and lower the arm
+            mechOps.raiseLift(params.LIFT_CLIP_SCORE);
+            Actions.runBlocking(
+                    drive.actionBuilder(drive.pose)
+                            .strafeToLinearHeading(specimenScoringSlide.position, specimenScoringSlide.heading)
+                            .build());
+            mechOps.openClaw();
+
+            mechOps.raiseLift(params.LIFT_MIN_LOW);
+            Actions.runBlocking(
+                    drive.actionBuilder(drive.pose)
+                            .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
+                            .build());
+
             //          Lower Lift
 
+/**
 
-            /**
-
-
-
-
-             // Grab the specimen
-             if(opModeIsActive()) {
-             safeWaitSeconds(1);
-             }
 
              Actions.runBlocking(
              drive.actionBuilder(drive.pose)

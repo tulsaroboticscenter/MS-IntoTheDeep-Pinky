@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile2;
-import org.firstinspires.ftc.teamcode.Libs.DriveMecanumFTCLib;
+//import org.firstinspires.ftc.teamcode.Libs.DriveMecanumFTCLib;
 import org.firstinspires.ftc.teamcode.Hardware.MSParams;
 
 @TeleOp(name="Robot: Teleop FC", group="Robot")
@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.Hardware.MSParams;
 
     private final static HWProfile2 robot = new HWProfile2();
     private final LinearOpMode opMode = this;
-    public DriveMecanumFTCLib drive = new DriveMecanumFTCLib(robot, opMode);
+    //public DriveMecanumFTCLib drive = new DriveMecanumFTCLib(robot, opMode);
     public final static MSParams params = new MSParams();
 
 

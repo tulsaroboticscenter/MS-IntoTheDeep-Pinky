@@ -124,15 +124,15 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
     // These constants define the desired driving/control characteristics
     // They can/should be tweaked to suit the specific robot drive train.
     static final double     DRIVE_SPEED             = 0.4;     // Max driving speed for better distance accuracy.
-    static final double TURN_SPEED = 0.2;     // Max turn speed to limit turn rate.
+    static final double     TURN_SPEED              = 0.2;     // Max turn speed to limit turn rate.
     static final double     HEADING_THRESHOLD       = 1.0 ;    // How close must the heading get to the target before moving to next step.
                                                                // Requiring more accuracy (a smaller number) will often make the turn take longer to get into the final position.
     // Define the Proportional control coefficient (or GAIN) for "heading control".
     // We define one value when Turning (larger errors), and the other is used when Driving straight (smaller errors).
-                                                               // Increase these numbers if the heading does not correct strongly enough (eg: a heavy robot or using tracks)
+    // Increase these numbers if the heading does not correct strongly enough (eg: a heavy robot or using tracks)
     // Decrease these numbers if the heading does not settle on the correct value (eg: very agile robot with omni wheels)
-                                                               static final double P_TURN_GAIN = 0.02;     // Larger is more responsive, but also less stable.
-    static final double P_DRIVE_GAIN = 0.03;     // Larger is more responsive, but also less stable.
+    static final double     P_TURN_GAIN            = 0.02;     // Larger is more responsive, but also less stable.
+    static final double     P_DRIVE_GAIN           = 0.03;     // Larger is more responsive, but also less stable.
 
 
     @Override

@@ -32,6 +32,7 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -57,6 +58,9 @@ import java.util.List;
  * When an AprilTag in the TagLibrary is detected, the SDK provides location and orientation of the robot, relative to the field origin.
  * This information is provided in the "robotPose" member of the returned "detection".
  *
+ * To learn about the Field Coordinate System that is defined for FTC (and used by this OpMode), see the FTC-DOCS link below:
+ * https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
+ *
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
@@ -69,20 +73,20 @@ public class ConceptAprilTagLocalization extends LinearOpMode {
     /**
      * Variables to store the position and orientation of the camera on the robot. Setting these
      * values requires a definition of the axes of the camera and robot:
-     * <p>
+     *
      * Camera axes:
      * Origin location: Center of the lens
      * Axes orientation: +x right, +y down, +z forward (from camera's perspective)
-     * <p>
+     *
      * Robot axes (this is typical, but you can define this however you want):
      * Origin location: Center of the robot at field height
      * Axes orientation: +x right, +y forward, +z upward
-     * <p>
+     *
      * Position:
      * If all values are zero (no translation), that implies the camera is at the center of the
      * robot. Suppose your camera is positioned 5 inches to the left, 7 inches forward, and 12
      * inches above the ground - you would need to set the position to (-5, 7, 12).
-     * <p>
+     *
      * Orientation:
      * If all values are zero (no rotation), that implies the camera is pointing straight up. In
      * most cases, you'll need to set the pitch to -90 degrees (rotation about the x-axis), meaning

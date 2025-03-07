@@ -30,9 +30,9 @@ Concept:	This is a sample OpMode that illustrates performing a specific function
             locate based on their name.  These OpModes may not produce a drivable robot.
 
 Utility:    This sample type is provided as a useful tool, or aide, to perform some specific development task.
-It is not expected to be something you would include in your own robot code.
-To use the tool, comment out the @Disabled annotation and build the App.
-Read the comments found in the sample for an explanation of its intended use.
+            It is not expected to be something you would include in your own robot code.
+            To use the tool, comment out the @Disabled annotation and build the App.
+            Read the comments found in the sample for an explanation of its intended use.
 
 After the prefix, other conventions will apply:
 

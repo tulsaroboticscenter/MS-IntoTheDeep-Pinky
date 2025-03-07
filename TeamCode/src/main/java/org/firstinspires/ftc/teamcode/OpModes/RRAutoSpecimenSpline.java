@@ -41,6 +41,7 @@ import org.firstinspires.ftc.teamcode.Hardware.HWProfile2;
 import org.firstinspires.ftc.teamcode.Hardware.MSParams;
 import org.firstinspires.ftc.teamcode.Libs.MSMechOps;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 //@Disabled
 @Autonomous(name = "Auto - SPECIMENS Spline", group = "Competition", preselectTeleOp = "RobotTeleOp")
@@ -120,10 +121,10 @@ public class RRAutoSpecimenSpline extends LinearOpMode{
         Pose2d parkPrepPose = new Pose2d(0, 0, 0);
         Pose2d parkPose = new Pose2d(0, 0, 0);
         double waitSecondsBeforeDrop = 0;
-        MecanumDrive drive = new MecanumDrive(hardwareMap, initPose);
+        PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
 
 
-        drive = new MecanumDrive(hardwareMap, initPose);
+        drive = new PinpointDrive(hardwareMap, initPose);
 
         /*****************
          * Set values for RoadRunner Pathing

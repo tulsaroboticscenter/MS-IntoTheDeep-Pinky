@@ -33,6 +33,7 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 */
 
 import android.graphics.Color;
+
 import com.qualcomm.hardware.sparkfun.SparkFunLEDStick;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -86,7 +87,7 @@ public class ConceptLEDStick extends OpMode {
         telemetry.addLine("Hold the B button to turn red");
         telemetry.addLine("Hold the left bumper to turn off");
         telemetry.addLine("Use DPAD Up/Down to change brightness");
-
+        
         if (getRuntime() > END_GAME_TIME) {
             int[] ledColors = {Color.RED, Color.YELLOW, Color.RED, Color.YELLOW, Color.RED,
                     Color.YELLOW, Color.RED, Color.YELLOW, Color.RED, Color.YELLOW};
