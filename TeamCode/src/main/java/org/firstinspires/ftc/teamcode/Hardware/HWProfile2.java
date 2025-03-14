@@ -64,12 +64,19 @@ public class  HWProfile2 {
     public Servo servoWrist;
     public Servo servoBar;
     public Servo servoExtend;
+    //s6
     public Servo servoExtendRight;
+    //s5
     public Servo servoBucket;
     public Servo servoClaw;
+    //s1
     public Servo servoTwist;
+    //s2
     public Servo servoSpice;
-
+    public Servo servoClawRotation1;
+    //s3
+    public Servo servoClawRotation2;
+    //s4
     public GoBildaPinpointDriverRR pinpoint; // pinpoint CH i2C port 1
 
 

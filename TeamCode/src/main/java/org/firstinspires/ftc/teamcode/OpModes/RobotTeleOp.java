@@ -147,17 +147,17 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
 
-            if (gamepad1.y) {
-                // What Happens when we hit Y Triangle - Dump to transfer
-                robot.servoExtendRight.setPosition(params.ExtendRight_CATCH);
-                robot.servoExtend.setPosition(params.Extend_Catch);
-               // robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-                TwistPosition = params.TWIST_HORIZONTAL;
-                robot.servoBucket.setPosition(params.Bucket_Catch);
-                robot.servoBar.setPosition(params.Bar_Up);
-                robot.servoWrist.setPosition(params.Wrist_Up);
-                mBase = params.LIFT_RESET;
-            }   // end of if(gamepad1.y)
+//            if (gamepad1.y) {
+//                // What Happens when we hit Y Triangle - Dump to transfer
+//                robot.servoExtendRight.setPosition(params.ExtendRight_CATCH);
+//                robot.servoExtend.setPosition(params.Extend_Catch);
+//               // robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+//                TwistPosition = params.TWIST_HORIZONTAL;
+//                robot.servoBucket.setPosition(params.Bucket_Catch);
+//                robot.servoBar.setPosition(params.Bar_Up);
+//                robot.servoWrist.setPosition(params.Wrist_Up);
+//                mBase = params.LIFT_RESET;
+//            }   // end of if(gamepad1.y)
 
             if (gamepad1.x) {
                 // Square
