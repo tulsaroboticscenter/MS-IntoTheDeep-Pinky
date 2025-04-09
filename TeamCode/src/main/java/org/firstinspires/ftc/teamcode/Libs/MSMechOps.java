@@ -1,20 +1,9 @@
 package org.firstinspires.ftc.teamcode.Libs;
 
-import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
-import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile2;
-import org.firstinspires.ftc.teamcode.Hardware.MSParams;
-import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.teamcode.Hardware.MSParams;
 
 public class MSMechOps {
@@ -53,10 +42,11 @@ public class MSMechOps {
     }
 
     public void armout() {
-        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        robot.servoExtend.setPosition(params.Extend_IN);
+        //robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+        //robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoWrist.setPosition(params.Wrist_Down);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         robot.servoBucket.setPosition(params.Bucket_Down);
         //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoTwist.setPosition(params.TWIST_VERTICAL);
@@ -67,10 +57,9 @@ public class MSMechOps {
     public void armin() {
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoExtend.setPosition(params.Extend_IN);
-        robot.servoBar.setPosition(params.Bar_Auto);
-        robot.servoWrist.setPosition(params.Wrist_Auto);
+//        robot.servoBar.setPosition(params.Bar_Auto);
+//        robot.servoWrist.setPosition(params.Wrist_Auto);
         robot.servoBucket.setPosition(params.Bucket_Down);
-        //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
 
@@ -83,10 +72,11 @@ public class MSMechOps {
     }   // end of liftPosition method
 
     public void armoutGold() {
-        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        robot.servoExtend.setPosition(params.Extend_IN);
-        robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoWrist.setPosition(params.Wrist_Down);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
+        //robot.servoBar.setPosition(params.Bar_Down);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         robot.servoBucket.setPosition(params.Bucket_Down);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         //robot.servoTwist.setPosition(params.TWIST_VERTICAL);
@@ -133,6 +123,12 @@ public class MSMechOps {
         opMode.sleep(1500);
     }
 
+    public void WallGrab(){
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        robot.motorRIGHT.setTargetPosition(params.RIGHT_Wall);
+        robot.motorLEFT.setTargetPosition(params.LEFT_Wall);
+    }
 
 
 }

@@ -60,6 +60,8 @@ public class  HWProfile2 {
     public DcMotorEx motorRR;
 
     public DcMotorEx motorLift;
+    public DcMotorEx motorRIGHT;
+    public DcMotorEx motorLEFT;
 
     public Servo servoWrist;
     public Servo servoBar;
@@ -73,6 +75,7 @@ public class  HWProfile2 {
     public Servo servoTwist;
     //s2
     public Servo servoSpice;
+
     public Servo servoClawRotation1;
     //s3
     public Servo servoClawRotation2;

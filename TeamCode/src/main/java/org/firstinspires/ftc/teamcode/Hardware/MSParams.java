@@ -46,6 +46,16 @@ public class MSParams {
 
     public final int LIFT_Auto_Park =910;
 
+    // ARM LIFTS
+    public final int RIGHT_Wall = 20;
+    public final int LEFT_Wall = 20;
+
+    public final int RIGHT_Sub_High = 100;
+    public final int LEFT_Sub_High = 100;
+
+    public final int Right_High_Bucket = 200;
+    public final int Left_High_Bucket = 200;
+
     //wrist camands
     public final double Wrist_Up = .98;
     public final double Wrist_Release = 0.4;
@@ -65,4 +75,8 @@ public class MSParams {
     public final double SPICE_OPEN = 0.3;
     public final double SPICE_CLOSE = .57;
 
+    public final double CLAWROTATION2_DOWN = .5;
+    public final double CLAWROTATION1_DOWN = .5;
+    public final double CLAWROTATION2_UP = .5;
+    public final double CLAWROTATION1_UP = .5;
 }
