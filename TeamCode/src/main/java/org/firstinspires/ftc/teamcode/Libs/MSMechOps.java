@@ -23,8 +23,12 @@ public class MSMechOps {
         params = autoParams;
 
     }   // close RRMechOps constructor
+    public void elbowMove( double elbow) {
 
-
+        //elbow = Range.clip(elbow, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
+        robot.servoClawRotation1.setPosition(elbow);
+        robot.servoClawRotation2.setPosition(1-elbow);
+    }
 
     public void raiseLift(int mBase) {
 
@@ -45,8 +49,8 @@ public class MSMechOps {
         //robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         //robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        elbowMove(params.CLAWROTATION2_DOWN);
         robot.servoBucket.setPosition(params.Bucket_Down);
         //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoTwist.setPosition(params.TWIST_VERTICAL);
@@ -106,6 +110,7 @@ public class MSMechOps {
 
     public void AutoDump(){
        // robot.servoWrist.setPosition(params.Wrist_Release);
+
        // robot.servoBar.setPosition(params.Bar_Auto);
        // opMode.sleep(300);
         //liftPosition(params.LIFT_Top_B);

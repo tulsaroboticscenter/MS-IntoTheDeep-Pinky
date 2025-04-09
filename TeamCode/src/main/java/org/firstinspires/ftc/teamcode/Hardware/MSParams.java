@@ -76,7 +76,7 @@ public class MSParams {
     public final double SPICE_CLOSE = .57;
 
     public final double CLAWROTATION2_DOWN = .5;
-    public final double CLAWROTATION1_DOWN = .5;
+    //public final double CLAWROTATION1_DOWN = .5;
     public final double CLAWROTATION2_UP = .5;
     public final double CLAWROTATION1_UP = .5;
 }
