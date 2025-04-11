@@ -79,7 +79,7 @@ public class MSMechOps {
         robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
         robot.servoExtend.setPosition(params.Extend_OUT);
         //robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         robot.servoBucket.setPosition(params.Bucket_Down);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
@@ -129,7 +129,7 @@ public class MSMechOps {
     }
 
     public void WallGrab(){
-        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         robot.motorRIGHT.setTargetPosition(params.RIGHT_Wall);
         robot.motorLEFT.setTargetPosition(params.LEFT_Wall);

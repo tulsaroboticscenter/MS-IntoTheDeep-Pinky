@@ -53,6 +53,9 @@ public class MSParams {
     public final int RIGHT_Sub_High = 100;
     public final int LEFT_Sub_High = 100;
 
+    public final int LEFT_Floor = 10;
+    public final int RIGHT_Floor =10;
+
     public final int Right_High_Bucket = 200;
     public final int Left_High_Bucket = 200;
 
