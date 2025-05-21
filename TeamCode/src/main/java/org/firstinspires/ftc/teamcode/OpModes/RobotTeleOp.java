@@ -76,6 +76,7 @@ public class RobotTeleOp extends LinearOpMode {
         telemetry.update();
 
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
+
         robot.servoWrist.setPosition(params.Wrist_Up);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoBar.setPosition(params.Bar_Up);
