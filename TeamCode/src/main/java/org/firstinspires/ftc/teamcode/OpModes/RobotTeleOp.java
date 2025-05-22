@@ -74,15 +74,12 @@ public class RobotTeleOp extends LinearOpMode {
         robot.pinpoint.recalibrateIMU();
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
-
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
-
-        //robot.servoWrist.setPosition(params.Wrist_Up);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoBar.setPosition(params.Bar_Up);
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        robot.servoBucket.setPosition(params.Bucket_Catch);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -102,7 +99,7 @@ public class RobotTeleOp extends LinearOpMode {
         double powerFactor = 1;
 
         int mBase = params.LIFT_RESET;
-        int aBase = params.LEFT_Wall;
+        int aBase = params.LEFT_Floor;
 
         while (opModeIsActive()) {
 
@@ -183,8 +180,8 @@ public class RobotTeleOp extends LinearOpMode {
 
             if (gamepad1.b) {
                 //circle  reset (down)
-              robot.motorLEFT.setTargetPosition(params.LEFT_Wall);
-              robot.motorRIGHT.setTargetPosition(params.RIGHT_Wall);
+              robot.motorLEFT.setTargetPosition(params.LEFT_Floor);
+              robot.motorRIGHT.setTargetPosition(params.RIGHT_Floor);
             }
 
             if(gamepad1.dpad_left){
@@ -195,8 +192,6 @@ public class RobotTeleOp extends LinearOpMode {
             }
 
             if(gamepad1.dpad_right){
-                //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-                mBase = params.LIFT_CLIP_SCORE;
                 aBase = params.LEFT_Sub_High;
             }
 
@@ -286,8 +281,7 @@ public class RobotTeleOp extends LinearOpMode {
             telemetry.addData("Left Power", leftPower);
             telemetry.addData("Right Power", rightPower);
             telemetry.addData("Lift set point", mBase);
-
-            telemetry.addData("Eli Pink Shirt", "yes");
+            telemetry.addData("Angle set point", aBase);
             telemetry.update();
         }
     }
