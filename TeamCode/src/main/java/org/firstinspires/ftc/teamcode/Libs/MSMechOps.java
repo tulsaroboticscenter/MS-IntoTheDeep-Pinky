@@ -72,9 +72,17 @@ public class MSMechOps {
 
     public void liftPosition(int targetPosition){
         robot.motorLift.setPower(params.LIFT_POWER);
+        robot.motorLiftRight.setPower(params.LIFT_POWER);
         robot.motorLift.setTargetPosition(targetPosition);
+        robot.motorLiftRight.setTargetPosition(targetPosition);
     }   // end of liftPosition method
-
+    
+    public void anglePosition(int targetPosition){
+        robot.motorRIGHT.setPower(params.ANGLE_POWER);
+        robot.motorLEFT.setPower(params.ANGLE_POWER);
+        robot.motorRIGHT.setTargetPosition(targetPosition);
+        robot.motorLEFT.setTargetPosition(targetPosition);
+    }
     public void armoutGold() {
         robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
         robot.servoExtend.setPosition(params.Extend_OUT);
@@ -94,15 +102,15 @@ public class MSMechOps {
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoBucket.setPosition(params.Bucket_Catch);
         robot.servoBar.setPosition(params.Bar_Up);
-        robot.servoWrist.setPosition(params.Wrist_Up);
+        //robot.servoWrist.setPosition(params.Wrist_Up);
         opMode.sleep(1000);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
         robot.servoBar.setPosition(params.Bar_Auto);
-        robot.servoWrist.setPosition(params.Wrist_Auto);
+      //  robot.servoWrist.setPosition(params.Wrist_Auto);
     }
 
     public void BucketReset() {
-        robot.servoWrist.setPosition(params.Wrist_Release);
+        //robot.servoWrist.setPosition(params.Wrist_Release);
         robot.servoBar.setPosition(params.Bar_Auto);
         robot.servoBucket.setPosition(params.Bucket_Catch);
     }

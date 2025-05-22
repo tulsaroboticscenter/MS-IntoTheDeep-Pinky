@@ -41,20 +41,27 @@ public class MSParams {
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 2450;
     public final double LIFT_POWER = 0.5;
+
     public final int LIFT_Top_B = 1950 ;
     public final int LIFT_Bottom_B = 401;
 
     public final int LIFT_Auto_Park =910;
 
     // ARM LIFTS
-    public final int RIGHT_Wall = 20;
-    public final int LEFT_Wall = 20;
+
+    public final double ANGLE_POWER = 0.5;
+    public final int RIGHT_Wall = 50;
+    public final int LEFT_Wall = 50;
 
     public final int RIGHT_Sub_High = 100;
     public final int LEFT_Sub_High = 100;
 
     public final int LEFT_Floor = 10;
     public final int RIGHT_Floor =10;
+
+    public final int RIGHT_CLIMB =50;
+
+    public final int LEFT_CLIMB =50;
 
     public final int Right_High_Bucket = 200;
     public final int Left_High_Bucket = 200;
@@ -79,7 +86,7 @@ public class MSParams {
     public final double SPICE_CLOSE = .57;
 
     public final double CLAWROTATION2_DOWN = .5;
-    //public final double CLAWROTATION1_DOWN = .5;
+    public final double CLAWROTATION1_DOWN = .5;
     public final double CLAWROTATION2_UP = .5;
     public final double CLAWROTATION1_UP = .5;
 }

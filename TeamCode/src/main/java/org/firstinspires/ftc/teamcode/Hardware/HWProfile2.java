@@ -60,11 +60,12 @@ public class  HWProfile2 {
     public DcMotorEx motorRR;
 
     public DcMotorEx motorLift;
+    public DcMotorEx motorLiftRight;
     public DcMotorEx motorRIGHT;
     public DcMotorEx motorLEFT;
 
-    public Servo servoWrist;
-    public Servo servoBar;
+    //public Servo servoWrist;
+   public Servo servoBar;
     public Servo servoExtend;
     //s6
     public Servo servoExtendRight;
@@ -174,6 +175,30 @@ public class  HWProfile2 {
         motorLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         motorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        motorLiftRight = ahwMap.get(DcMotorEx.class, "motorLiftRight");
+        //motorLiftRight.setDirection(DcMotor.Direction.REVERSE);
+        motorLiftRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        motorLiftRight.setTargetPosition(0);
+        motorLiftRight.setPower(0);
+        motorLiftRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        motorLiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        motorLEFT = ahwMap.get(DcMotorEx.class, "motorLEFT");
+        motorLEFT.setDirection(DcMotor.Direction.REVERSE);
+        motorLEFT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        motorLEFT.setTargetPosition(0);
+        motorLEFT.setPower(0);
+        motorLEFT.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        motorLEFT.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        motorRIGHT = ahwMap.get(DcMotorEx.class, "motorRIGHT");
+        //motorLiftRight.setDirection(DcMotor.Direction.REVERSE);
+        motorRIGHT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        motorRIGHT.setTargetPosition(0);
+        motorRIGHT.setPower(0);
+        motorRIGHT.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        motorRIGHT.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         /**
          * Initialize Servos
@@ -182,12 +207,13 @@ public class  HWProfile2 {
         // servoGrabber2 = hwMap.servo.get("servoGrabber2");
         servoClaw = ahwMap.servo.get("servoClaw");
         servoTwist = ahwMap.servo.get("servoTwist");
-        servoWrist = ahwMap.servo.get("servoWrist");
+       // servoWrist = ahwMap.servo.get("servoWrist");
         servoBar = ahwMap.servo.get("servoBar");
         servoExtend = ahwMap.servo.get("servoExtend");
         servoBucket = ahwMap.servo.get("servoBucket");
         servoExtendRight = ahwMap.servo.get("servoExtendRight");
         servoSpice = ahwMap.servo.get("servoSpice");
+        servoExtend = ahwMap.servo.get("servoExtend");
 
         // Zeroing Servos
         //servoIntake.setPower(0.5);
