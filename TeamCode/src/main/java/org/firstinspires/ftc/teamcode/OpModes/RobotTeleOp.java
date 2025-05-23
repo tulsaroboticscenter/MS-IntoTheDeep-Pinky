@@ -74,13 +74,13 @@ public class RobotTeleOp extends LinearOpMode {
         robot.pinpoint.recalibrateIMU();
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
-        robot.servoClaw.setPosition(params.CLAW_CLOSE);
-        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoExtend.setPosition(params.Extend_IN);
-        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-        robot.pinpoint.recalibrateIMU();
+       // robot.servoClaw.setPosition(params.CLAW_CLOSE);
+        //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        //robot.servoExtend.setPosition(params.Extend_IN);
+        //robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+        //robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        //robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
@@ -234,22 +234,64 @@ public class RobotTeleOp extends LinearOpMode {
                         buttonPressTimer.reset();
                     }
             }
+            //Climb
+//            if (gamepad1.right_stick_button){
+//                clawPosition = params.CLAW_OPEN;
+//               // robot.servoWrist.setPosition(params.Wrist_Climb);
+//                robot.servoBar.setPosition(params.Bar_Climb);
+//                robot.servoBucket.setPosition(params.Bucket_Dump);
+//                Climb_Timer.reset();
+//                climbGrabStage = 2;
+//
+//            }else if (climbGrabStage == 2 && Climb_Timer.time()>1){
+//                //robot.servoWrist.setPosition(params.Wrist_Climb);
+//                //robot.servoBar.setPosition(params.Bar_Climb);
+//                robot.servoExtend.setPosition(params.Extend_Climbi);
+//                robot.servoExtendRight.setPosition(params.ExtendRight_Climbi);
+//                robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+//                robot.motorClimb.setPower(1);
+//                climbGrabStage = 3;
+//
+//            }else if (climbGrabStage == 3 && Climb_Timer.time()>2){
+//                clawPosition = params.CLAW_CLOSE;
+//                robot.servoFlag.setPosition(params.FLAG_UP);
+//                climbGrabStage = 4;
+//            } else if (climbGrabStage == 4 && Climb_Timer.time()>3) {
+//                robot.servoBar.setPosition(params.Bar_Up);
+//                robot.servoWrist.setPosition(params.Wrist_Auto);
+//            } else if (climbGrabStage == 5){
+//                robot.motorClimb.setPower(1);
+//                climbBase =  robot.CLIMB;
+//                clawPosition = params.CLAW_OPEN;
+//                robot.servoFlag.setPosition(params.FLAG_DOWN);
+//                Climb_Timer.reset();
+//                climbGrabStage = 6;
+//            } else if (climbGrabStage == 6 && Climb_Timer.time()>.3){
+//                robot.servoBar.setPosition(params.Bar_Auto);
+//                robot.servoExtend.setPosition(params.Extend_IN);
+//                robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+//                robot.servoWrist.setPosition(params.Wrist_Auto);
+//            }
 
 
-            if (gamepad1.right_trigger>0.3) {
+            if (gamepad2.right_bumper) {
                 mBase=mBase+3;
+            }
+            if (gamepad2.left_bumper) {
+                mBase=mBase-3;
+            }
+
+            if (gamepad2.left_trigger>.3){
+                aBase=aBase-3;
+            }
+
+
+            if (gamepad2.right_trigger>.3){
+                aBase=aBase+3;
+
             }
 
             //Lower Slides
-            if (gamepad1.left_trigger>0.3) {
-                mBase=mBase-3;
-            }
-
-            //emergency down button
-            if (gamepad2.left_trigger>0.3){
-                mBase=mBase-3;
-            }
-
             if (gamepad2.x){
 
             }

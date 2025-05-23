@@ -168,7 +168,7 @@ public class  HWProfile2 {
 //        mecanum = new MecanumDrive(motorLF, motorRF, motorLR, motorRR);
 
         motorLift = ahwMap.get(DcMotorEx.class, "motorLift");
-        motorLift.setDirection(DcMotor.Direction.REVERSE);
+        //motorLift.setDirection(DcMotor.Direction.REVERSE);
         motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         motorLift.setTargetPosition(0);
         motorLift.setPower(0);
@@ -176,7 +176,7 @@ public class  HWProfile2 {
         motorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorLiftRight = ahwMap.get(DcMotorEx.class, "motorLiftRight");
-        //motorLiftRight.setDirection(DcMotor.Direction.REVERSE);
+        motorLiftRight.setDirection(DcMotor.Direction.REVERSE);
         motorLiftRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         motorLiftRight.setTargetPosition(0);
         motorLiftRight.setPower(0);

@@ -39,7 +39,7 @@ public class MSParams {
     public final int LIFT_CLIP_HIGH = 1400;
     public final int LIFT_CLIP_SCORE = 1050;
     public final int LIFT_CLIP_LOW = 1050;
-    public final int LIFT_MAX_HIGH = 2450;
+    public final int LIFT_MAX_HIGH = 3650;
     public final double LIFT_POWER = 0.5;
 
     public final int LIFT_Top_B = 1950 ;
@@ -85,8 +85,8 @@ public class MSParams {
     public final double SPICE_OPEN = 0.3;
     public final double SPICE_CLOSE = .57;
 
-    public final double CLAWROTATION2_DOWN = .5;
-    public final double CLAWROTATION1_DOWN = .5;
-    public final double CLAWROTATION2_UP = .5;
-    public final double CLAWROTATION1_UP = .5;
+    public final double CLAWROTATION2_DOWN = 0.5;
+    public final double CLAWROTATION1_DOWN = 0.5;
+    public final double CLAWROTATION2_UP = 0.5;
+    public final double CLAWROTATION1_UP = 0.5;
 }
