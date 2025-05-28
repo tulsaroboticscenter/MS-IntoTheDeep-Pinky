@@ -163,8 +163,7 @@ public class RobotTeleOp extends LinearOpMode {
                 // Square
                 robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-                robot.motorLEFT.setTargetPosition(params.LEFT_Floor);
-                robot.motorRIGHT.setTargetPosition(params.RIGHT_Floor);
+                aBase = params.ANGLE_Floor;
                // robot.servoWrist.setPosition(params.Wrist_Down);
                 TwistPosition = params.TWIST_HORIZONTAL;
                 clawPosition = params.CLAW_OPEN;
@@ -180,24 +179,22 @@ public class RobotTeleOp extends LinearOpMode {
 
             if (gamepad1.b) {
                 //circle  reset (down)
-              robot.motorLEFT.setTargetPosition(params.LEFT_Floor);
-              robot.motorRIGHT.setTargetPosition(params.RIGHT_Floor);
+              aBase= params.ANGLE_Floor;
             }
 
             if(gamepad1.dpad_left){
                // robot.servoWrist.setPosition(params.Wrist_Release);
                 robot.servoBar.setPosition(params.Bar_Auto);
                 mBase = params.LIFT_CLIP_HIGH;
-                aBase = params.LEFT_Sub_High;
+                aBase = params.ANGLE_Sub_High;
             }
 
             if(gamepad1.dpad_right){
-                aBase = params.LEFT_Sub_High;
+                aBase = params.ANGLE_Sub_High;
             }
 
             if (gamepad1.dpad_up) {
-                robot.motorRIGHT.setTargetPosition(params.RIGHT_CLIMB);
-                robot.motorLEFT.setTargetPosition(params.LEFT_CLIMB);
+                aBase= params.ANGLE_Climb;
             }
 
             if (gamepad1.dpad_down) {
@@ -305,6 +302,7 @@ public class RobotTeleOp extends LinearOpMode {
             //if gamepad2 left trigger is active the range clip will not apply
             if(!(gamepad2.left_trigger>0.3)) {
                 mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
+                aBase =Range.clip (aBase, params.ANGLE_MIN_LOW, params.ANGLE_MAX_HIGH);
             }
 
             mechOps.liftPosition(mBase);

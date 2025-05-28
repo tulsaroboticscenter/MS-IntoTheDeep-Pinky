@@ -50,21 +50,13 @@ public class MSParams {
     // ARM LIFTS
 
     public final double ANGLE_POWER = 0.5;
-    public final int RIGHT_Wall = 50;
-    public final int LEFT_Wall = 50;
-
-    public final int RIGHT_Sub_High = 100;
-    public final int LEFT_Sub_High = 100;
-
-    public final int LEFT_Floor = 10;
-    public final int RIGHT_Floor =10;
-
-    public final int RIGHT_CLIMB =50;
-
-    public final int LEFT_CLIMB =50;
-
-    public final int Right_High_Bucket = 200;
-    public final int Left_High_Bucket = 200;
+    public final int ANGLE_Wall = 50;
+    public final int ANGLE_Sub_High = 100;
+    public final int ANGLE_Floor = 10;
+    public final int ANGLE_MAX_HIGH =1372;
+    public final int ANGLE_MIN_LOW = 10;
+    public final int ANGLE_Climb =50;
+    public final int ANGLE_High_Bucket = 200;
 
     //wrist camands
     public final double Wrist_Up = .98;

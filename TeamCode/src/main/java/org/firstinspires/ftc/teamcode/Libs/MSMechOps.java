@@ -31,11 +31,13 @@ public class MSMechOps {
     }
 
     public void raiseLift(int mBase) {
-
         mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
         robot.motorLift.setPower(1);
         robot.motorLift.setTargetPosition(mBase);
     }
+
+
+
 
     public void openClaw(){
         robot.servoSpice.setPosition(params.SPICE_OPEN);
@@ -139,8 +141,8 @@ public class MSMechOps {
     public void WallGrab(){
         //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        robot.motorRIGHT.setTargetPosition(params.RIGHT_Wall);
-        robot.motorLEFT.setTargetPosition(params.LEFT_Wall);
+        robot.motorRIGHT.setTargetPosition(params.ANGLE_Wall);
+        robot.motorLEFT.setTargetPosition(params.ANGLE_Wall);
     }
 
 
