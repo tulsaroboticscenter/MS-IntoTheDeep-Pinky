@@ -167,8 +167,7 @@ public class RRAutoSpecimenSpline extends LinearOpMode{
             // Score specimen
 
             // TODO: Add code to release the sample and lower the arm
-            mechOps.raiseLift(params.LEFT_Sub_High);
-            mechOps.raiseLift(params.RIGHT_Sub_High);
+            mechOps.raiseLift(params.ANGLE_Sub_High);
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
                             .strafeToLinearHeading(specimenScoringSlide.position, specimenScoringSlide.heading)

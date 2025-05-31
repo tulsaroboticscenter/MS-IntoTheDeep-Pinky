@@ -99,7 +99,7 @@ public class RobotTeleOp extends LinearOpMode {
         double powerFactor = 1;
 
         int mBase = params.LIFT_RESET;
-        int aBase = params.LEFT_Floor;
+        int aBase = params.ANGLE_Floor;
 
         while (opModeIsActive()) {
 
@@ -287,10 +287,24 @@ public class RobotTeleOp extends LinearOpMode {
                 aBase=aBase+3;
 
             }
+            if (gamepad2.a){
+            robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+            robot.servoExtend.setPosition(params.Extend_IN);
+            }
+            if (gamepad2.b){
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+            }
+
+            if (gamepad2.y){
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
+            }
 
             //Lower Slides
             if (gamepad2.x){
-
+                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+                robot.servoExtend.setPosition(params.Extend_OUT);
             }
 
             // limit the max and min value of mBase

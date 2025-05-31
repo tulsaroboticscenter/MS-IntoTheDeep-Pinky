@@ -14,12 +14,12 @@ public class MSParams {
     public final double ALIGN_ARM_HIGH = 0.0;
 
     //extend
-    public final double ExtendRight_IN = 0.5;
-    public final double ExtendRight_OUT = 1.0;
+    public final double ExtendRight_IN = 0;
+    public final double ExtendRight_OUT = 1;
     public final double ExtendRight_CATCH = 0.7;
     public final double Extend_Catch = 0.3;
-    public final double Extend_IN = 0.45;
-    public final double Extend_OUT = 0.0;
+    public final double Extend_IN = 1;
+    public final double Extend_OUT = 0;
 
     //bar
     public final double Bar_Up = 0.25;//22
@@ -70,15 +70,15 @@ public class MSParams {
     public final double CLAW_CLOSE = 0.33;
 
     //twist camands
-    public final double TWIST_HORIZONTAL = 0.3;
-    public final double TWIST_VERTICAL = 0;
+    public final double TWIST_HORIZONTAL = 0;
+    public final double TWIST_VERTICAL = 0.2;
 
     //Specimen claw
     public final double SPICE_OPEN = 0.3;
     public final double SPICE_CLOSE = .57;
 
-    public final double CLAWROTATION2_DOWN = 0.5;
-    public final double CLAWROTATION1_DOWN = 0.5;
-    public final double CLAWROTATION2_UP = 0.5;
-    public final double CLAWROTATION1_UP = 0.5;
+    public final double CLAWROTATION2_DOWN = 0;
+    public final double CLAWROTATION1_DOWN = 1;
+    public final double CLAWROTATION2_UP = 1;
+    public final double CLAWROTATION1_UP = 0;
 }
