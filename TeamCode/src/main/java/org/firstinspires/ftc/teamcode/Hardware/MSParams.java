@@ -41,6 +41,7 @@ public class MSParams {
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 3650;
     public final double LIFT_POWER = 0.5;
+    public final int LIFT_Floor = 200;
 
     public final int LIFT_Top_B = 1950 ;
     public final int LIFT_Bottom_B = 401;
@@ -71,7 +72,7 @@ public class MSParams {
 
     //twist camands
     public final double TWIST_HORIZONTAL = 0;
-    public final double TWIST_VERTICAL = 0.2;
+    public final double TWIST_VERTICAL = 0.6;
 
     //Specimen claw
     public final double SPICE_OPEN = 0.3;

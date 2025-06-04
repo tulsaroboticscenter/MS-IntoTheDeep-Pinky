@@ -74,13 +74,13 @@ public class RobotTeleOp extends LinearOpMode {
         robot.pinpoint.recalibrateIMU();
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
-       // robot.servoClaw.setPosition(params.CLAW_CLOSE);
-        //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        //robot.servoExtend.setPosition(params.Extend_IN);
-        //robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        //robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-        //robot.pinpoint.recalibrateIMU();
+       robot.servoClaw.setPosition(params.CLAW_CLOSE);
+       robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+       robot.servoExtend.setPosition(params.Extend_OUT);
+       robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+       robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+       robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+       robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
@@ -164,6 +164,7 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
                 aBase = params.ANGLE_Floor;
+                mBase =params.LIFT_Floor;
                // robot.servoWrist.setPosition(params.Wrist_Down);
                 TwistPosition = params.TWIST_HORIZONTAL;
                 clawPosition = params.CLAW_OPEN;
@@ -174,7 +175,8 @@ public class RobotTeleOp extends LinearOpMode {
             // A=X symbol
             if (gamepad1.a) {
                 // X
-
+                aBase= params.ANGLE_Sub_High;
+                mBase= params.LIFT_CLIP_HIGH;
             }
 
             if (gamepad1.b) {
@@ -301,10 +303,13 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
             }
 
-            //Lower Slides
             if (gamepad2.x){
                 robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
                 robot.servoExtend.setPosition(params.Extend_OUT);
+            }
+
+            if (gamepad2.dpad_down){
+                aBase= params.ANGLE_Floor;
             }
 
             // limit the max and min value of mBase
