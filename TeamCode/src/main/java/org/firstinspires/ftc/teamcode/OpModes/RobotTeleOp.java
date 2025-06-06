@@ -76,8 +76,8 @@ public class RobotTeleOp extends LinearOpMode {
         telemetry.update();
        robot.servoClaw.setPosition(params.CLAW_CLOSE);
        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-       robot.servoExtend.setPosition(params.Extend_OUT);
-       robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+       robot.servoExtend.setPosition(params.Extend_IN);
+       robot.servoExtendRight.setPosition(params.ExtendRight_IN);
        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
        robot.pinpoint.recalibrateIMU();
@@ -92,6 +92,7 @@ public class RobotTeleOp extends LinearOpMode {
         double TwistPosition = params.TWIST_HORIZONTAL;
         ElapsedTime buttonPressTimer = new ElapsedTime();
         boolean clawOpen = false;
+        boolean pickPos = false;
         double botHeading;
         double x, y, rx;
         double rotX, rotY;
@@ -147,22 +148,22 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
 
-//            if (gamepad1.y) {
-//                // What Happens when we hit Y Triangle - Dump to transfer
-//                robot.servoExtendRight.setPosition(params.ExtendRight_CATCH);
-//                robot.servoExtend.setPosition(params.Extend_Catch);
-//               // robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-//                TwistPosition = params.TWIST_HORIZONTAL;
-//                robot.servoBucket.setPosition(params.Bucket_Catch);
-//                robot.servoBar.setPosition(params.Bar_Up);
-//                robot.servoWrist.setPosition(params.Wrist_Up);
-//                mBase = params.LIFT_RESET;
-//            }   // end of if(gamepad1.y)
-
+           if (gamepad1.y) {
+               //TRIANGLE BASKET
+            aBase=params.ANGLE_High_Bucket;
+            mBase=params.LIFT_MAX_HIGH;
+            robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+            robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+            robot.servoExtendRight.setPosition(params.ExtendRight_BASKET);
+            robot.servoExtend.setPosition(params.Extend_BASKET);
+            }
             if (gamepad1.x) {
                 // Square
-                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
+                robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
+                robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+                pickPos =false;
                 aBase = params.ANGLE_Floor;
                 mBase =params.LIFT_Floor;
                // robot.servoWrist.setPosition(params.Wrist_Down);
@@ -174,38 +175,55 @@ public class RobotTeleOp extends LinearOpMode {
 
             // A=X symbol
             if (gamepad1.a) {
-                // X
+                // X CLIP HIGH
                 aBase= params.ANGLE_Sub_High;
                 mBase= params.LIFT_CLIP_HIGH;
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+                robot.servoExtend.setPosition(params.Extend_OUT);
+                //robot.
             }
 
             if (gamepad1.b) {
                 //circle  reset (down)
+              mBase= params.LIFT_RESET;
               aBase= params.ANGLE_Floor;
+              robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+              robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
             }
 
             if(gamepad1.dpad_left){
-               // robot.servoWrist.setPosition(params.Wrist_Release);
-                robot.servoBar.setPosition(params.Bar_Auto);
-                mBase = params.LIFT_CLIP_HIGH;
-                aBase = params.ANGLE_Sub_High;
-            }
 
-            if(gamepad1.dpad_right){
-                aBase = params.ANGLE_Sub_High;
+
             }
 
             if (gamepad1.dpad_up) {
                 aBase= params.ANGLE_Climb;
             }
 
+            if (gamepad1.dpad_right){
+                aBase= params.ANGLE_Wall;
+                mBase= params.LIFT_WALL;
+                robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+                robot.servoExtend.setPosition(params.Extend_IN);
+                robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+            }
+
             if (gamepad1.dpad_down) {
-                clawPosition = params.CLAW_OPEN;
-                spicePosition = params.SPICE_OPEN;
-                clawOpen = true;
-                //robot.servoClaw.setPosition(params.CLAW_OPEN);
-                //robot.servoWrist.setPosition(params.Wrist_Release);
-                mBase = params.LIFT_Bottom_B;
+                if((buttonPressTimer.time() > 0.25) && pickPos){
+                    robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+                    robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
+                    pickPos = false;
+                    buttonPressTimer.reset();
+                } else if(buttonPressTimer.time() > 0.25) {
+                    robot.servoExtend.setPosition(params.Extend_FLOOR);
+                    robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
+                    pickPos = true;
+                    buttonPressTimer.reset();
+                }
             }
 
             if (gamepad1.right_bumper) {
@@ -232,6 +250,15 @@ public class RobotTeleOp extends LinearOpMode {
 
                         buttonPressTimer.reset();
                     }
+            }
+            if (gamepad1.left_trigger>.3){
+                mBase=mBase-5;
+            }
+
+
+            if (gamepad1.right_trigger>.3){
+                mBase=mBase+5;
+
             }
             //Climb
 //            if (gamepad1.right_stick_button){
