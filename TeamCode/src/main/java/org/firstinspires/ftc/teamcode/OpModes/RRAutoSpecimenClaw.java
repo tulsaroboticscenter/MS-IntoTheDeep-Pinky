@@ -139,8 +139,10 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         // Raise Arm to high bar scoring position
 
         // TODO: Add code to release the sample and lower the arm
-        if (opModeIsActive()) robot.servoSpice.setPosition(params.SPICE_CLOSE);
-       // if (opModeIsActive()) robot.servoWrist.setPosition(params.Wrist_Auto);
+        if (opModeIsActive()) robot.servoSpice.setPosition(params.CLAW_CLOSE);
+        if (opModeIsActive()) robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
+        if (opModeIsActive()) robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
+
         if (opModeIsActive()) mechOps.raiseLift(params.LIFT_CLIP_HIGH);
 
         telemetry.addData("x", drive.pose.position.x);

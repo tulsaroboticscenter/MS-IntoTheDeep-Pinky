@@ -80,7 +80,7 @@ public class RobotTeleOp extends LinearOpMode {
        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-       robot.pinpoint.recalibrateIMU();
+       //robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 

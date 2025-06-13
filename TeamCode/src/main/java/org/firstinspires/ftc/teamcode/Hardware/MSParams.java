@@ -66,6 +66,7 @@ public class MSParams {
     public final int ANGLE_MIN_LOW = 10;
     public final int ANGLE_Climb =50;
     public final int ANGLE_High_Bucket = 1309;
+    public final int ANGLE_START = 0;
 
 
     //wrist camands
