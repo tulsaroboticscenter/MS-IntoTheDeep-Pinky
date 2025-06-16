@@ -118,7 +118,7 @@ public class RRPinkyBucket extends LinearOpMode{
 
         // TODO: Add code to release the sample and lower the arm
         // if (opModeIsActive()) robot.servoWrist.setPosition(params.Wrist_Auto);
-        if (opModeIsActive()) mechOps.liftPosition(params.LIFT_Top_B);
+        //if (opModeIsActive()) mechOps.liftPosition(params.LIFT_Top_B);
 
 
 
@@ -131,10 +131,10 @@ public class RRPinkyBucket extends LinearOpMode{
                         .build());
 
         //score sample
-        if (opModeIsActive()) //mechOps.AutoDump();
+        //if (opModeIsActive()) mechOps.AutoDump();
 
 
-        if (opModeIsActive()) //mechOps.armoutGold();
+        //if (opModeIsActive()) mechOps.armoutGold();
         //pick sample 1
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
