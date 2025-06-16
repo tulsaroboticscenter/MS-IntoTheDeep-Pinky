@@ -123,7 +123,7 @@ public class MSMechOps {
 
        // robot.servoBar.setPosition(params.Bar_Auto);
        // opMode.sleep(300);
-        //liftPosition(params.LIFT_Top_B);
+        liftPosition(params.LIFT_Top_B);
         opMode.sleep(1500);
         robot.servoBucket.setPosition(params.Bucket_Dump);
         opMode.sleep(1000);
@@ -139,10 +139,14 @@ public class MSMechOps {
     }
 
     public void WallGrab(){
-        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        robot.motorRIGHT.setTargetPosition(params.ANGLE_Wall);
-        robot.motorLEFT.setTargetPosition(params.ANGLE_Wall);
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        robot.servoExtend.setPosition(params.Extend_IN);
+        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+        anglePosition(params.ANGLE_Wall);
+        liftPosition(params.LIFT_WALL);
+
     }
 
 
