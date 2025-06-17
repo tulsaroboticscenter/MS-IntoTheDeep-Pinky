@@ -36,7 +36,11 @@ public class MSMechOps {
         robot.motorLift.setTargetPosition(mBase);
     }
 
+    public void SpiceScore(){
+        anglePosition(params.ANGLE_Sub_High);
+        liftPosition(params.LIFT_CLIP_HIGH);
 
+    }
 
 
     public void openClaw(){
@@ -48,15 +52,17 @@ public class MSMechOps {
     }
 
     public void armout() {
-        //robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        //robot.servoExtend.setPosition(params.Extend_IN);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
         robot.servoBar.setPosition(params.Bar_Down);
-        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-        elbowMove(params.CLAWROTATION2_DOWN);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         robot.servoBucket.setPosition(params.Bucket_Down);
-        //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoTwist.setPosition(params.TWIST_VERTICAL);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
+        robot.motorLEFT.setTargetPosition(params.ANGLE_Floor);
+        robot.motorRIGHT.setTargetPosition(params.ANGLE_Floor);
+
 
 
     }
@@ -149,5 +155,12 @@ public class MSMechOps {
 
     }
 
-
+    public void PreSweep(){
+        liftPosition(params.LIFT_Floor);
+        anglePosition(params.ANGLE_AUTO);
+    }
+    public void Sweep(){
+        liftPosition(params.LIFT_Floor);
+        anglePosition(params.ANGLE_SWEEP);
+    }
 }

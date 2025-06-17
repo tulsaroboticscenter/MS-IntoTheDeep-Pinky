@@ -67,8 +67,8 @@ public class MSParams {
     public final int ANGLE_Climb =50;
     public final int ANGLE_High_Bucket = 1309;
     public final int ANGLE_START = 0;
-
-
+    public final int ANGLE_AUTO=20;
+    public final int ANGLE_SWEEP=5;
     //wrist camands
     public final double Wrist_Up = .98;
     public final double Wrist_Release = 0.4;
