@@ -44,23 +44,23 @@ public class MSParams {
     public final int LIFT_RESET = 0;
     public final int LIFT_MIN_LOW = 0;
     public final int LIFT_CLIP_HIGH = 1335;
-    public final int LIFT_CLIP_SCORE = 1050;
+    public final int LIFT_CLIP_SCORE = 1956;
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 3650;
     public final double LIFT_POWER = 0.5;
-    public final int LIFT_Floor = 2468;
-
+    public final int LIFT_Floor = 1800;
+    public final int LIFT_SWEEP = 1900;
     public final int LIFT_Top_B = 1950 ;
     public final int LIFT_Bottom_B = 401;
     public final int LIFT_Auto_Park =910;
     public final int LIFT_WALL = 0;
     public final int LIFT_OUT =2468;
-
+    //1335 a780
     // ARM LIFTS
 
     public final double ANGLE_POWER = 0.5;
     public final int ANGLE_Wall = 1111;
-    public final int ANGLE_Sub_High = 911;
+    public final int ANGLE_Sub_High = 780;
     public final int ANGLE_Floor = 10;
     public final int ANGLE_MAX_HIGH =1372;
     public final int ANGLE_MIN_LOW = 10;
@@ -68,7 +68,7 @@ public class MSParams {
     public final int ANGLE_High_Bucket = 1309;
     public final int ANGLE_START = 0;
     public final int ANGLE_AUTO=20;
-    public final int ANGLE_SWEEP=5;
+    public final int ANGLE_SWEEP=10;
     //wrist camands
     public final double Wrist_Up = .98;
     public final double Wrist_Release = 0.4;

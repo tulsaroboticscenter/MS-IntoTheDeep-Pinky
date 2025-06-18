@@ -153,10 +153,10 @@ public class RobotTeleOp extends LinearOpMode {
             aBase=params.ANGLE_High_Bucket;
             mBase=params.LIFT_MAX_HIGH;
             robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-            robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
-            robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
             robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
             robot.servoExtend.setPosition(params.Extend_OUT);
+            robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+            robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
             }
             if (gamepad1.x) {
                 // Square
@@ -204,7 +204,7 @@ public class RobotTeleOp extends LinearOpMode {
             }
 
             if (gamepad1.dpad_right){
-
+     //wall grab
                 aBase= params.ANGLE_Wall;
                 mBase= params.LIFT_WALL;
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);

@@ -143,11 +143,11 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         // Raise Arm to high bar scoring position
 
         // TODO: Add code to release the sample and lower the arm
-        if (opModeIsActive()) robot.servoSpice.setPosition(params.CLAW_CLOSE);
+        if (opModeIsActive()) robot.servoSpice.setPosition(params.CLAW_OPEN);
         if (opModeIsActive()) robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
         if (opModeIsActive()) robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
-        if (opModeIsActive()) robot.servoExtend.setPosition(params.Extend_OUT);
-        if (opModeIsActive()) robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        if (opModeIsActive()) robot.servoExtend.setPosition(params.Extend_IN);
+        if (opModeIsActive()) robot.servoExtendRight.setPosition(params.ExtendRight_IN);
 
 
         telemetry.addData("x", drive.pose.position.x);
@@ -171,6 +171,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
 
         // TODO: Add code to release the sample and lower the arm
         if (opModeIsActive()) mechOps.raiseLift(params.LIFT_CLIP_SCORE);
+        if (opModeIsActive()) mechOps.anglePosition(params.ANGLE_Sub_High);
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(specimenScoringSlide.position, specimenScoringSlide.heading)
@@ -184,6 +185,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
 
         //          Lower Lift
         if (opModeIsActive()) mechOps.raiseLift(params.LIFT_Floor);
+        if (opModeIsActive()) mechOps.anglePosition(params.ANGLE_SWEEP);
         if (opModeIsActive()) mechOps.armout();
         // Drive to color specimen Position
         // Push Color Sample1 into the Observation area

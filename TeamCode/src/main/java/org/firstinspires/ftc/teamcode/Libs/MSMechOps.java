@@ -34,6 +34,8 @@ public class MSMechOps {
         mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
         robot.motorLift.setPower(1);
         robot.motorLift.setTargetPosition(mBase);
+        robot.motorLiftRight.setPower(1);
+        robot.motorLiftRight.setTargetPosition(mBase);
     }
 
     public void SpiceScore(){
@@ -52,16 +54,18 @@ public class MSMechOps {
     }
 
     public void armout() {
-        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-        robot.servoExtend.setPosition(params.Extend_OUT);
+        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+        robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        robot.servoBucket.setPosition(params.Bucket_Down);
-        robot.servoTwist.setPosition(params.TWIST_VERTICAL);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
         robot.motorLEFT.setTargetPosition(params.ANGLE_Floor);
         robot.motorRIGHT.setTargetPosition(params.ANGLE_Floor);
+        robot.motorLift.setTargetPosition(params.LIFT_SWEEP);
+        robot.motorLiftRight.setTargetPosition(params.LIFT_SWEEP);
+
 
 
 
