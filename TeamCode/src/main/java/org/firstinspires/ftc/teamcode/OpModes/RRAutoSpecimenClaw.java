@@ -64,8 +64,8 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         //TODO: Initialize hardware
         robot.init(hardwareMap, false);
         mechOps = new MSMechOps(robot, opMode, params);
-
-        robot.servoSpice.setPosition(params.SPICE_CLOSE);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
         robot.servoBar.setPosition(params.Bar_Auto);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
@@ -79,7 +79,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
             telemetry.addData(">", "Touch Play to start OpMode");
 
             telemetry.update();
-            robot.servoSpice.setPosition(params.SPICE_CLOSE);
+            robot.servoClaw.setPosition(params.CLAW_CLOSE);
         }
         //Game Play Button  is pressed
         if (opModeIsActive() && !isStopRequested()) {
@@ -120,32 +120,30 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         /*****************
          * Set values for RoadRunner Pathing
          */
-        specimenPrePreScoringPosition= new Pose2d(-10, 5, Math.toRadians(45));//old
-        specimenPreScoringPosition = new Pose2d(-20, -9, 0);
-        specimenScoringPosition = new Pose2d(-22.32, -12.17, 0);
-        specimenScoringSlide = new Pose2d(-30, -15, 0);
-        grabSpecimenPosition = new Pose2d(-6, 23, Math.toRadians(-180));
-        coloredSample1Position = new Pose2d(-5, 30, Math.toRadians(-90));
-        coloredSample2Position = new Pose2d(-35, -58, 90);
-        coloredSample3Position = new Pose2d(-35, -60, Math.toRadians(90));
-        midwayPose0 = new Pose2d(-25, 9, Math.toRadians(103)); //Before first pick old
-        midwayPose1 = new Pose2d(-28, 18, Math.toRadians(120)); //pick close to wall 35 .-27
-        Sweep3 = new Pose2d(-32.7, 21, 42.27);
-        midwayPose2 = new Pose2d(-21.6, 13, Math.toRadians(130)); //pick middle 25  .-27
-        Sweep2 = new Pose2d(-27.5, 14, 54);
-        midwayPose3 = new Pose2d(-15.6, 6, Math.toRadians(135));//pick first 15
-        Sweep1 = new Pose2d(-21.84, 5, 61);
+        specimenPrePreScoringPosition= new Pose2d(10, 5, Math.toRadians(45));//old
+        specimenPreScoringPosition = new Pose2d(20, 2, Math.toRadians(0));
+        specimenScoringPosition = new Pose2d(22.32, 0, 0);
+        specimenScoringSlide = new Pose2d(24, -15, 0);
+        grabSpecimenPosition = new Pose2d(6, -23, Math.toRadians(0));
+        coloredSample1Position = new Pose2d(5, 30, Math.toRadians(90));
+        coloredSample2Position = new Pose2d(35, 58, 90);
+        coloredSample3Position = new Pose2d(35, 60, Math.toRadians(90));
+        midwayPose0 = new Pose2d(25, -15, Math.toRadians(-45)); //Before first pick old
+        midwayPose1 = new Pose2d(28, -15, Math.toRadians(-45)); //pick close to wall 35 .-27
+        Sweep3 = new Pose2d(32.7, -21, Math.toRadians(-45));
+        midwayPose2 = new Pose2d(21.6, -22, Math.toRadians(-45)); //pick middle 25  .-27
+        Sweep2 = new Pose2d(27.5, -14, Math.toRadians(-135));
+        midwayPose3 = new Pose2d(15.6, -10, Math.toRadians(-45));//pick first 15
+        Sweep1 = new Pose2d(21.84, -9, Math.toRadians(-135));
 
-
-
-        parkPose = new Pose2d(0, 40, Math.toRadians(-180));
+        parkPose = new Pose2d(0, -35, Math.toRadians(0));
 
         // Raise Arm to high bar scoring position
 
         // TODO: Add code to release the sample and lower the arm
-        if (opModeIsActive()) robot.servoSpice.setPosition(params.CLAW_OPEN);
-        if (opModeIsActive()) robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
-        if (opModeIsActive()) robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
+        if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
+        if (opModeIsActive()) robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        if (opModeIsActive()) robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         if (opModeIsActive()) robot.servoExtend.setPosition(params.Extend_IN);
         if (opModeIsActive()) robot.servoExtendRight.setPosition(params.ExtendRight_IN);
 
@@ -155,6 +153,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
         telemetry.update();
 
+        if (opModeIsActive()) mechOps.SpiceScore2();
 
         // Drive to specimen scoring position
         Actions.runBlocking(
@@ -170,12 +169,11 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         telemetry.update();
 
         // TODO: Add code to release the sample and lower the arm
-        if (opModeIsActive()) mechOps.raiseLift(params.LIFT_CLIP_SCORE);
-        if (opModeIsActive()) mechOps.anglePosition(params.ANGLE_Sub_High);
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(specimenScoringSlide.position, specimenScoringSlide.heading)
-                        .build());
+        if (opModeIsActive())mechOps.armin();
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(specimenScoringSlide.position, specimenScoringSlide.heading)
+//                        .build());
         if (opModeIsActive()) mechOps.openClaw();
 
         telemetry.addData("x", drive.pose.position.x);
@@ -192,13 +190,8 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         // Drive to color sample1 Position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(specimenPreScoringPosition.position,specimenPreScoringPosition.heading)
+                       // .strafeToLinearHeading(specimenPreScoringPosition.position,specimenPreScoringPosition.heading)
                         .strafeToLinearHeading(midwayPose0.position, midwayPose0.heading)
-//                            .strafeToLinearHeading(midwayPose4.position, midwayPose4.heading)
-//                            .strafeToLinearHeading(coloredSample1Position.position, coloredSample1Position.heading)
-//                            .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-//                            .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
-//                            .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
                         .build());
 
         if (opModeIsActive()) mechOps.PreSweep();
@@ -252,14 +245,14 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
 
         Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            .turnTo(Math.toRadians(-180))
+                            .turnTo(Math.toRadians(0))
                             .lineToX(3)
                             .build()  );
 
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
         safeWaitSeconds(0.1);
 
-        if (opModeIsActive()) mechOps.SpiceScore();
+        if (opModeIsActive()) mechOps.SpiceScore2();
 
         // Drive to specimen scoring position
         Actions.runBlocking(
@@ -272,7 +265,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         // Score specimen
 
         // TODO: Add code to release the sample and lower the arm
-        if (opModeIsActive()) mechOps.SpiceScore();
+        if (opModeIsActive()) mechOps.SpiceScore2();
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -288,14 +281,14 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .turnTo(Math.toRadians(-180))
+                        .turnTo(Math.toRadians(0))
                         .lineToX(3)
                         .build()  );
         // Grab the specimen 3
-        if (opModeIsActive()) robot.servoSpice.setPosition(params.SPICE_CLOSE);
+        if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
         safeWaitSeconds(0.1);
 
-        if (opModeIsActive()) mechOps.SpiceScore();
+        if (opModeIsActive()) mechOps.SpiceScore2();
 
 
 
@@ -327,14 +320,14 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
 //here to stop 4th Spec
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .turnTo(Math.toRadians(-180))
+                        .turnTo(Math.toRadians(0))
                         .lineToX(3)
                         .build()  );
         // Grab the specimen 4
-        if (opModeIsActive()) robot.servoSpice.setPosition(params.SPICE_CLOSE);
+        if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
         safeWaitSeconds(0.1);
 
-        if (opModeIsActive()) mechOps.SpiceScore();
+        if (opModeIsActive()) mechOps.SpiceScore2();
 
 
         // Drive to specimen scoring position

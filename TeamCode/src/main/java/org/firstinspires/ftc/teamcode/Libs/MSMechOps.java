@@ -43,7 +43,14 @@ public class MSMechOps {
         liftPosition(params.LIFT_CLIP_HIGH);
 
     }
-
+    public void SpiceScore2(){
+        anglePosition(params.ANGLE_Sub_High);
+        liftPosition(params.LIFT_CLIP_HIGH);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
+    }
 
     public void openClaw(){
         robot.servoSpice.setPosition(params.SPICE_OPEN);
@@ -73,11 +80,13 @@ public class MSMechOps {
     public void armin() {
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoExtend.setPosition(params.Extend_IN);
-//        robot.servoBar.setPosition(params.Bar_Auto);
-//        robot.servoWrist.setPosition(params.Wrist_Auto);
         robot.servoBucket.setPosition(params.Bucket_Down);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
+        robot.motorLEFT.setTargetPosition(params.ANGLE_Floor);
+        robot.motorRIGHT.setTargetPosition(params.ANGLE_Floor);
+        robot.motorLift.setTargetPosition(params.LIFT_RESET);
+        robot.motorLiftRight.setTargetPosition(params.LIFT_RESET);
 
 
     }
@@ -162,9 +171,17 @@ public class MSMechOps {
     public void PreSweep(){
         liftPosition(params.LIFT_Floor);
         anglePosition(params.ANGLE_AUTO);
+        robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+        robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
     }
     public void Sweep(){
         liftPosition(params.LIFT_Floor);
         anglePosition(params.ANGLE_SWEEP);
+        robot.servoExtend.setPosition(params.Extend_FLOOR);
+        robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
     }
 }
