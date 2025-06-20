@@ -48,7 +48,8 @@ public class MSParams {
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 3650;
     public final double LIFT_POWER = 0.5;
-    public final int LIFT_Floor = 1800;
+    public final int LIFT_Floor = 1425;
+    public final int LIFT_FloorMax = 1425;
     public final int LIFT_SWEEP = 1900;
     public final int LIFT_Top_B = 1950 ;
     public final int LIFT_Bottom_B = 401;
@@ -78,8 +79,8 @@ public class MSParams {
     public final double Wrist_Box = 0.68; //45
 
 //Claw camands
-    public final double CLAW_OPEN = 0.65;
-    public final double CLAW_CLOSE = 0.25;
+    public final double CLAW_OPEN = 0.25;
+    public final double CLAW_CLOSE = 0.65;
 
     //twist camands
     public final double TWIST_HORIZONTAL = 0;

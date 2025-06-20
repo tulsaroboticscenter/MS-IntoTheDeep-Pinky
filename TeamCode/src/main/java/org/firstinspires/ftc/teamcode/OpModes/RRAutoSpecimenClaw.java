@@ -121,14 +121,14 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
          * Set values for RoadRunner Pathing
          */
         specimenPrePreScoringPosition= new Pose2d(10, 5, Math.toRadians(45));//old
-        specimenPreScoringPosition = new Pose2d(20, 2, Math.toRadians(0));
-        specimenScoringPosition = new Pose2d(22.32, 0, 0);
+        specimenPreScoringPosition = new Pose2d(20, 10, Math.toRadians(0));
+        specimenScoringPosition = new Pose2d(25, 18, 0);
         specimenScoringSlide = new Pose2d(24, -15, 0);
         grabSpecimenPosition = new Pose2d(6, -23, Math.toRadians(0));
         coloredSample1Position = new Pose2d(5, 30, Math.toRadians(90));
         coloredSample2Position = new Pose2d(35, 58, 90);
         coloredSample3Position = new Pose2d(35, 60, Math.toRadians(90));
-        midwayPose0 = new Pose2d(25, -15, Math.toRadians(-45)); //Before first pick old
+        midwayPose0 = new Pose2d(10, -15, Math.toRadians(-45)); //Before first pick old
         midwayPose1 = new Pose2d(28, -15, Math.toRadians(-45)); //pick close to wall 35 .-27
         Sweep3 = new Pose2d(32.7, -21, Math.toRadians(-45));
         midwayPose2 = new Pose2d(21.6, -22, Math.toRadians(-45)); //pick middle 25  .-27
@@ -154,7 +154,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         telemetry.update();
 
         if (opModeIsActive()) mechOps.SpiceScore2();
-
+        sleep(1000);
         // Drive to specimen scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -167,14 +167,21 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         telemetry.addData("y", drive.pose.position.y);
         telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
         telemetry.update();
-
+        if (opModeIsActive()) mechOps.openClaw();
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenPreScoringPosition.position, specimenPreScoringPosition.heading)
+                        .build());
+        if (opModeIsActive()) mechOps.openClaw();
+        sleep(1000);
         // TODO: Add code to release the sample and lower the arm
         if (opModeIsActive())mechOps.armin();
+        if (opModeIsActive()) mechOps.openClaw();
 //        Actions.runBlocking(
 //                drive.actionBuilder(drive.pose)
 //                        .strafeToLinearHeading(specimenScoringSlide.position, specimenScoringSlide.heading)
 //                        .build());
-        if (opModeIsActive()) mechOps.openClaw();
+
 
         telemetry.addData("x", drive.pose.position.x);
         telemetry.addData("y", drive.pose.position.y);
@@ -182,9 +189,8 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         telemetry.update();
 
         //          Lower Lift
-        if (opModeIsActive()) mechOps.raiseLift(params.LIFT_Floor);
-        if (opModeIsActive()) mechOps.anglePosition(params.ANGLE_SWEEP);
-        if (opModeIsActive()) mechOps.armout();
+        //if (opModeIsActive()) mechOps.raiseLift(params.LIFT_Floor);
+
         // Drive to color specimen Position
         // Push Color Sample1 into the Observation area
         // Drive to color sample1 Position
@@ -193,7 +199,8 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
                        // .strafeToLinearHeading(specimenPreScoringPosition.position,specimenPreScoringPosition.heading)
                         .strafeToLinearHeading(midwayPose0.position, midwayPose0.heading)
                         .build());
-
+        if (opModeIsActive()) mechOps.anglePosition(params.ANGLE_SWEEP);
+        if (opModeIsActive()) mechOps.armout();
         if (opModeIsActive()) mechOps.PreSweep();
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)

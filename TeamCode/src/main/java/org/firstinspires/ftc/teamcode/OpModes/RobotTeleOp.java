@@ -192,8 +192,8 @@ public class RobotTeleOp extends LinearOpMode {
               aBase= params.ANGLE_Floor;
               robot.servoExtend.setPosition(params.Extend_BARCLEAR);
               robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
-              robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-              robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+              robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
+              robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
             }
 
 
