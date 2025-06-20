@@ -149,14 +149,14 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorRR.setPower(backRightPower * powerFactor);
 
            if (gamepad1.y) {
-               //TRIANGLE BASKET
-            aBase=params.ANGLE_High_Bucket;
-            mBase=params.LIFT_MAX_HIGH;
-            robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-            robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-            robot.servoExtend.setPosition(params.Extend_OUT);
-            robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-            robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+               // TRI CLIP HIGH
+               aBase= params.ANGLE_Sub_High;
+               mBase= params.LIFT_CLIP_HIGH;
+               robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+               robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+               robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+               robot.servoExtend.setPosition(params.Extend_OUT);
+               //robot.
             }
             if (gamepad1.x) {
                 // Square
@@ -176,35 +176,7 @@ public class RobotTeleOp extends LinearOpMode {
 
             // A=X symbol
             if (gamepad1.a) {
-                // X CLIP HIGH
-                aBase= params.ANGLE_Sub_High;
-                mBase= params.LIFT_CLIP_HIGH;
-                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-                robot.servoExtend.setPosition(params.Extend_OUT);
-                //robot.
-            }
-
-            if (gamepad1.b) {
-                //circle  reset (down)
-              mBase= params.LIFT_RESET;
-              aBase= params.ANGLE_Floor;
-              robot.servoExtend.setPosition(params.Extend_BARCLEAR);
-              robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
-            }
-
-            if(gamepad1.dpad_left){
-
-
-            }
-
-            if (gamepad1.dpad_up) {
-                aBase= params.ANGLE_Climb;
-            }
-
-            if (gamepad1.dpad_right){
-     //wall grab
+                //wall grab
                 aBase= params.ANGLE_Wall;
                 mBase= params.LIFT_WALL;
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
@@ -214,18 +186,29 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
             }
 
+            if (gamepad1.b) {
+                //circle  reset (down)
+              mBase= params.LIFT_RESET;
+              aBase= params.ANGLE_Floor;
+              robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+              robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
+              robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+              robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+            }
+
+
+            if (gamepad1.dpad_up) {
+                aBase=params.ANGLE_High_Bucket;
+                mBase=params.LIFT_MAX_HIGH;
+                robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+                robot.servoExtend.setPosition(params.Extend_OUT);
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+            }
+
             if (gamepad1.dpad_down) {
-                if((buttonPressTimer.time() > 0.25) && pickPos){
-                    robot.servoExtend.setPosition(params.Extend_BARCLEAR);
-                    robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
-                    pickPos = false;
-                    buttonPressTimer.reset();
-                } else if(buttonPressTimer.time() > 0.25) {
-                    robot.servoExtend.setPosition(params.Extend_FLOOR);
-                    robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
-                    pickPos = true;
-                    buttonPressTimer.reset();
-                }
+                CLIMB();
             }
 
             if (gamepad1.right_bumper) {
@@ -253,14 +236,23 @@ public class RobotTeleOp extends LinearOpMode {
                         buttonPressTimer.reset();
                     }
             }
-            if (gamepad1.left_trigger>.3){
-                mBase=mBase-5;
+          //claw drop
+            if (gamepad1.left_trigger>.3) {
+                if ((buttonPressTimer.time() > 0.25) && pickPos) {
+                    robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+                    robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
+                    pickPos = false;
+                    buttonPressTimer.reset();
+                } else if (buttonPressTimer.time() > 0.25) {
+                    robot.servoExtend.setPosition(params.Extend_FLOOR);
+                    robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
+                    pickPos = true;
+                    buttonPressTimer.reset();
+                }
             }
 
 
             if (gamepad1.right_trigger>.3){
-                mBase=mBase+5;
-
             }
             //Climb
 //            if (gamepad1.right_stick_button){
@@ -373,4 +365,30 @@ public class RobotTeleOp extends LinearOpMode {
             telemetry.update();
         }
     }
+    public void CLIMB(){
+        robot.motorLift.setPower(1);
+        robot.motorLiftRight.setPower(1);
+        robot.motorLEFT.setPower(1);
+        robot.motorRIGHT.setPower(1);
+        //prep climb
+        robot.servoClaw.setPosition(params.CLAW_CLOSE);
+        robot.servoExtend.setPosition(params.Extend_OUT);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
+        robot.motorLift.setTargetPosition(params.LIFT_CLIMB);
+        robot.motorLiftRight.setTargetPosition(params.LIFT_CLIMB);
+        robot.motorLEFT.setTargetPosition(params.ANGLE_Climb);
+        robot.motorRIGHT.setTargetPosition(params.ANGLE_Climb);
+        sleep(1000);
+        // climb
+        robot.motorLift.setTargetPosition(0);
+        robot.motorLiftRight.setTargetPosition(0);
+        sleep(1000);
+        robot.motorLEFT.setTargetPosition(0);
+        robot.motorRIGHT.setTargetPosition(0);
+
+    }
+
+
 }

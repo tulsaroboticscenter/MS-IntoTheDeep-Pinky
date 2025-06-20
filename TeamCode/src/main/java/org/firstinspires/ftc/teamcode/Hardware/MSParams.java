@@ -43,7 +43,7 @@ public class MSParams {
     //LIFT postions
     public final int LIFT_RESET = 0;
     public final int LIFT_MIN_LOW = 0;
-    public final int LIFT_CLIP_HIGH = 1335;
+    public final int LIFT_CLIP_HIGH = 1956;
     public final int LIFT_CLIP_SCORE = 1956;
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 3650;
@@ -55,6 +55,7 @@ public class MSParams {
     public final int LIFT_Auto_Park =910;
     public final int LIFT_WALL = 0;
     public final int LIFT_OUT =2468;
+    public final int LIFT_CLIMB =1000;
     //1335 a780
     // ARM LIFTS
 
@@ -64,7 +65,7 @@ public class MSParams {
     public final int ANGLE_Floor = 10;
     public final int ANGLE_MAX_HIGH =1372;
     public final int ANGLE_MIN_LOW = 10;
-    public final int ANGLE_Climb =50;
+    public final int ANGLE_Climb =1320;
     public final int ANGLE_High_Bucket = 1309;
     public final int ANGLE_START = 0;
     public final int ANGLE_AUTO=20;
