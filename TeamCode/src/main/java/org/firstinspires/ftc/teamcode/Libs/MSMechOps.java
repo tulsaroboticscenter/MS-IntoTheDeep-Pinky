@@ -134,20 +134,38 @@ public class MSMechOps {
     }
 
 
-    public void AutoDump(){
+    public void AutoDumpUp(){
        // robot.servoWrist.setPosition(params.Wrist_Release);
 
        // robot.servoBar.setPosition(params.Bar_Auto);
        // opMode.sleep(300);
-        liftPosition(params.LIFT_Top_B);
-        opMode.sleep(1500);
-        robot.servoBucket.setPosition(params.Bucket_Dump);
+        anglePosition(params.ANGLE_High_Bucket);
+        liftPosition(params.LIFT_MAX_HIGH);
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
         opMode.sleep(1000);
-        robot.servoBucket.setPosition(params.Bucket_Down);
-        opMode.sleep(200);
-        liftPosition(params.LIFT_RESET);
     }
+    public void AutoDumpDown() {
+        // robot.servoWrist.setPosition(params.Wrist_Release);
 
+        // robot.servoBar.setPosition(params.Bar_Auto);
+        // opMode.sleep(300);
+        robot.servoClaw.setPosition(params.CLAW_OPEN);
+        liftPosition(params.LIFT_MIN_LOW);
+        opMode.sleep(1000);
+        anglePosition(params.ANGLE_Floor);
+        liftPosition(params.LIFT_MIN_LOW);
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        opMode.sleep(1000);
+
+    }
     public void AutoSubPark(){
         robot.servoSpice.setPosition(params.SPICE_CLOSE);
         liftPosition(params.LIFT_Auto_Park);

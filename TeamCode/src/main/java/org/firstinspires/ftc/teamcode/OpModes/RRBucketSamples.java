@@ -131,7 +131,7 @@ public class RRBucketSamples extends LinearOpMode{
                         .build());
 
        //score sample
-        if (opModeIsActive()) mechOps.AutoDump();
+        if (opModeIsActive()) mechOps.AutoDumpUp();
 
 
         if (opModeIsActive()) mechOps.armoutGold();
@@ -150,7 +150,7 @@ public class RRBucketSamples extends LinearOpMode{
                         //   .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
-        if (opModeIsActive()) mechOps.AutoDump();
+        if (opModeIsActive()) mechOps.AutoDumpUp();
         if (opModeIsActive()) mechOps.armoutGold();
         //pick sample 2
         Actions.runBlocking(
@@ -167,7 +167,7 @@ public class RRBucketSamples extends LinearOpMode{
                         //   .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
-        if (opModeIsActive()) mechOps.AutoDump();
+        if (opModeIsActive()) mechOps.AutoDumpUp();
 
 
         if (opModeIsActive()) mechOps.armoutGold();
@@ -187,7 +187,7 @@ public class RRBucketSamples extends LinearOpMode{
                         //   .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
-        if (opModeIsActive()) mechOps.AutoDump();
+        if (opModeIsActive()) mechOps.AutoDumpUp();
 
         //parking
         if (opModeIsActive()) mechOps.AutoSubPark();
