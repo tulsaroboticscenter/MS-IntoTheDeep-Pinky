@@ -31,6 +31,8 @@ package org.firstinspires.ftc.teamcode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -332,7 +334,12 @@ public class RobotTeleOp extends LinearOpMode {
             if (gamepad2.dpad_down){
                 aBase= params.ANGLE_Floor;
             }
+            if (gamepad2.dpad_up) {
+            resetEncoders();
 
+            }
+
+            }
             // limit the max and min value of mBase
             // robot.servoBar.setPosition(barPosition);
             robot.servoClaw.setPosition(clawPosition);
@@ -390,5 +397,51 @@ public class RobotTeleOp extends LinearOpMode {
 
     }
 
+    public void resetEncoders(){
+        boolean extensionRetraction = false;
+        boolean angleRetraction = false;
+        int extensionPosition = 0;
+        int anglePosition = 0;
+        int liftPosition = 0;
+        boolean liftReset = false;
+        ElapsedTime retractionTime = new ElapsedTime();
+        retractionTime.reset();
+        robot.motorLift.setPower(0.75);
+        robot.motorLiftRight.setPower(0.75);
+
+        while (opModeIsActive() && !extensionRetraction){
+            if(robot.motorLift.getCurrent(CurrentUnit.AMPS) > 5){
+                robot.motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+                robot.motorLift.setTargetPosition(0);
+                robot.motorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.motorLiftRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+                robot.motorLiftRight.setTargetPosition(0);
+                robot.motorLiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                extensionRetraction = true;
+            } else {
+                extensionPosition = extensionPosition - 20;
+                robot.motorLift.setTargetPosition(extensionPosition);
+                robot.motorLiftRight.setTargetPosition(extensionPosition);
+            }
+        }
+
+        while (opModeIsActive() && !angleRetraction){
+            if(robot.motorLEFT.getCurrent(CurrentUnit.AMPS) > 5){
+                robot.motorLEFT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+                robot.motorLEFT.setTargetPosition(0);
+                robot.motorLEFT.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.motorRIGHT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+                robot.motorRIGHT.setTargetPosition(0);
+                robot.motorRIGHT.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                extensionRetraction = true;
+            } else {
+                anglePosition = anglePosition - 20;
+                robot.motorLEFT.setTargetPosition(anglePosition);
+                robot.motorRIGHT.setTargetPosition(anglePosition);
+            }
+        }
+
+
+    }
 
 }

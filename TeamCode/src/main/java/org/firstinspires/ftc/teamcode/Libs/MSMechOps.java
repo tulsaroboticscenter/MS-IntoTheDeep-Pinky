@@ -107,12 +107,9 @@ public class MSMechOps {
     public void armoutGold() {
         robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
         robot.servoExtend.setPosition(params.Extend_OUT);
-        //robot.servoBar.setPosition(params.Bar_Down);
-        //robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        robot.servoBucket.setPosition(params.Bucket_Down);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        //robot.servoTwist.setPosition(params.TWIST_VERTICAL);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
     }
     public void transfer() {
