@@ -63,7 +63,7 @@ public class MSParams {
     public final double ANGLE_POWER = 0.5;
     public final int ANGLE_Wall = 1111;
     public final int ANGLE_Sub_High = 780;
-    public final int ANGLE_Floor = 10;
+    public final int ANGLE_Floor = 20;
     public final int ANGLE_MAX_HIGH =1372;
     public final int ANGLE_MIN_LOW = 10;
     public final int ANGLE_Climb =1320;

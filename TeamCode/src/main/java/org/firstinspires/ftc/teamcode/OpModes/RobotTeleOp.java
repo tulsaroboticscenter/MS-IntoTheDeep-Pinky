@@ -65,8 +65,8 @@ public class RobotTeleOp extends LinearOpMode {
 
     private final static HWProfile2 robot = new HWProfile2();
     private final LinearOpMode opMode = this;
- //   public DriveMecanumFTCLib drive = new DriveMecanumFTCLib(robot, opMode);
- public final static MSParams params = new MSParams();
+    //   public DriveMecanumFTCLib drive = new DriveMecanumFTCLib(robot, opMode);
+    public final static MSParams params = new MSParams();
     public MSMechOps mechOps = new MSMechOps(robot, opMode, params);
 
     private double testPosition = 0;
@@ -76,13 +76,17 @@ public class RobotTeleOp extends LinearOpMode {
         robot.pinpoint.recalibrateIMU();
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
-       robot.servoClaw.setPosition(params.CLAW_CLOSE);
-       robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-       robot.servoExtend.setPosition(params.Extend_IN);
-       robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-       robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-       robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-       //robot.pinpoint.recalibrateIMU();
+        robot.servoClaw.setPosition(params.CLAW_CLOSE);
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        robot.servoExtend.setPosition(params.Extend_IN);
+        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+        robot.motorLift.setTargetPosition(params.LIFT_RESET);
+        robot.motorLiftRight.setTargetPosition(params.LIFT_RESET);
+        robot.motorLEFT.setTargetPosition(params.ANGLE_START);
+        robot.motorRIGHT.setTargetPosition(params.ANGLE_START);
+        //robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
@@ -132,9 +136,9 @@ public class RobotTeleOp extends LinearOpMode {
             botHeading = 0;             //
             //botHeading = pos.getHeading(AngleUnit.RADIANS);
 
-           rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-           rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
-          rotX = rotX * 1.1;  // Counteract imperfect strafing
+            rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
+            rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+            rotX = rotX * 1.1;  // Counteract imperfect strafing
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -150,15 +154,15 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
 
-           if (gamepad1.y) {
-               // TRI CLIP HIGH
-               aBase= params.ANGLE_Sub_High;
-               mBase= params.LIFT_CLIP_HIGH;
-               robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-               robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-               robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-               robot.servoExtend.setPosition(params.Extend_OUT);
-               //robot.
+            if (gamepad1.y) {
+                // TRI CLIP HIGH
+                aBase = params.ANGLE_Sub_High;
+                mBase = params.LIFT_CLIP_HIGH;
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
+                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+                robot.servoExtend.setPosition(params.Extend_OUT);
+                //robot.
             }
             if (gamepad1.x) {
                 // Square
@@ -166,10 +170,10 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
                 robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
                 robot.servoExtend.setPosition(params.Extend_BARCLEAR);
-                pickPos =false;
+                pickPos = false;
                 aBase = params.ANGLE_Floor;
-                mBase =params.LIFT_Floor;
-               // robot.servoWrist.setPosition(params.Wrist_Down);
+                mBase = params.LIFT_Floor;
+                // robot.servoWrist.setPosition(params.Wrist_Down);
                 TwistPosition = params.TWIST_HORIZONTAL;
                 clawPosition = params.CLAW_OPEN;
                 clawOpen = true;
@@ -179,8 +183,8 @@ public class RobotTeleOp extends LinearOpMode {
             // A=X symbol
             if (gamepad1.a) {
                 //wall grab
-                aBase= params.ANGLE_Wall;
-                mBase= params.LIFT_WALL;
+                aBase = params.ANGLE_Wall;
+                mBase = params.LIFT_WALL;
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
                 robot.servoExtend.setPosition(params.Extend_IN);
                 robot.servoExtendRight.setPosition(params.ExtendRight_IN);
@@ -190,18 +194,18 @@ public class RobotTeleOp extends LinearOpMode {
 
             if (gamepad1.b) {
                 //circle  reset (down)
-              mBase= params.LIFT_RESET;
-              aBase= params.ANGLE_Floor;
-              robot.servoExtend.setPosition(params.Extend_BARCLEAR);
-              robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
-              robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
-              robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
+                mBase = params.LIFT_RESET;
+                aBase = params.ANGLE_Floor;
+                robot.servoExtend.setPosition(params.Extend_BARCLEAR);
+                robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
+                robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
+                robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
             }
 
 
             if (gamepad1.dpad_up) {
-                aBase=params.ANGLE_High_Bucket;
-                mBase=params.LIFT_MAX_HIGH;
+                aBase = params.ANGLE_High_Bucket;
+                mBase = params.LIFT_MAX_HIGH;
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
                 robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
                 robot.servoExtend.setPosition(params.Extend_OUT);
@@ -214,12 +218,12 @@ public class RobotTeleOp extends LinearOpMode {
             }
 
             if (gamepad1.right_bumper) {
-                if((buttonPressTimer.time() > 0.25) && clawOpen){
+                if ((buttonPressTimer.time() > 0.25) && clawOpen) {
                     clawPosition = params.CLAW_CLOSE;
                     spicePosition = params.SPICE_CLOSE;
                     clawOpen = false;
                     buttonPressTimer.reset();
-                } else if(buttonPressTimer.time() > 0.25) {
+                } else if (buttonPressTimer.time() > 0.25) {
                     clawPosition = params.CLAW_OPEN;
                     spicePosition = params.SPICE_OPEN;
                     clawOpen = true;
@@ -228,18 +232,18 @@ public class RobotTeleOp extends LinearOpMode {
             }
 
             if (gamepad1.left_bumper) {
-                    if((buttonPressTimer.time() > 0.25) && TwistPosition == params.TWIST_HORIZONTAL){
-                        TwistPosition = params.TWIST_VERTICAL;
+                if ((buttonPressTimer.time() > 0.25) && TwistPosition == params.TWIST_HORIZONTAL) {
+                    TwistPosition = params.TWIST_VERTICAL;
 
-                        buttonPressTimer.reset();
-                    } else if(buttonPressTimer.time() > 0.25) {
-                        TwistPosition = params.TWIST_HORIZONTAL;
+                    buttonPressTimer.reset();
+                } else if (buttonPressTimer.time() > 0.25) {
+                    TwistPosition = params.TWIST_HORIZONTAL;
 
-                        buttonPressTimer.reset();
-                    }
+                    buttonPressTimer.reset();
+                }
             }
-          //claw drop
-            if (gamepad1.left_trigger>.3) {
+            //claw drop
+            if (gamepad1.left_trigger > .3) {
                 if ((buttonPressTimer.time() > 0.25) && pickPos) {
                     robot.servoExtend.setPosition(params.Extend_BARCLEAR);
                     robot.servoExtendRight.setPosition(params.ExtendRight_BARCLEAR);
@@ -254,8 +258,8 @@ public class RobotTeleOp extends LinearOpMode {
             }
 
 
-            if (gamepad1.right_trigger>.3){
-            }
+            //if (gamepad1.right_trigger > .3) {
+            //}
             //Climb
 //            if (gamepad1.right_stick_button){
 //                clawPosition = params.CLAW_OPEN;
@@ -297,82 +301,82 @@ public class RobotTeleOp extends LinearOpMode {
 
 
             if (gamepad2.right_bumper) {
-                mBase=mBase+3;
+                mBase = mBase + 3;
             }
             if (gamepad2.left_bumper) {
-                mBase=mBase-3;
+                mBase = mBase - 3;
             }
 
-            if (gamepad2.left_trigger>.3){
-                aBase=aBase-3;
+            if (gamepad2.left_trigger > .3) {
+                aBase = aBase - 3;
             }
 
 
-            if (gamepad2.right_trigger>.3){
-                aBase=aBase+3;
+            if (gamepad2.right_trigger > .3) {
+                aBase = aBase + 3;
 
             }
-            if (gamepad2.a){
-            robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-            robot.servoExtend.setPosition(params.Extend_IN);
+            if (gamepad2.a) {
+                robot.servoExtendRight.setPosition(params.ExtendRight_IN);
+                robot.servoExtend.setPosition(params.Extend_IN);
             }
-            if (gamepad2.b){
+            if (gamepad2.b) {
                 robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
             }
 
-            if (gamepad2.y){
+            if (gamepad2.y) {
                 robot.servoClawRotation2.setPosition(params.CLAWROTATION2_UP);
                 robot.servoClawRotation1.setPosition(params.CLAWROTATION1_UP);
             }
 
-            if (gamepad2.x){
+            if (gamepad2.x) {
                 robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
                 robot.servoExtend.setPosition(params.Extend_OUT);
             }
 
-            if (gamepad2.dpad_down){
-                aBase= params.ANGLE_Floor;
+            if (gamepad2.dpad_down) {
+                aBase = params.ANGLE_Floor;
             }
             if (gamepad2.dpad_up) {
-            resetEncoders();
+                resetEncoders();
 
             }
 
-            }
-            // limit the max and min value of mBase
-            // robot.servoBar.setPosition(barPosition);
-            robot.servoClaw.setPosition(clawPosition);
-            robot.servoSpice.setPosition(spicePosition);
-            robot.servoTwist.setPosition(TwistPosition);
+        // limit the max and min value of mBase
+        // robot.servoBar.setPosition(barPosition);
+        robot.servoClaw.setPosition(clawPosition);
+        robot.servoSpice.setPosition(spicePosition);
+        robot.servoTwist.setPosition(TwistPosition);
 
-            //if gamepad2 left trigger is active the range clip will not apply
-            if(!(gamepad2.left_trigger>0.3)) {
-                mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
-                aBase =Range.clip (aBase, params.ANGLE_MIN_LOW, params.ANGLE_MAX_HIGH);
-            }
+        //if gamepad2 left trigger is active the range clip will not apply
+        if (!(gamepad2.left_trigger > 0.3)) {
+            mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
+            aBase = Range.clip(aBase, params.ANGLE_MIN_LOW, params.ANGLE_MAX_HIGH);
+        }
 
-            mechOps.liftPosition(mBase);
-            mechOps.anglePosition(aBase);
+        mechOps.liftPosition(mBase);
+        mechOps.anglePosition(aBase);
 
-            telemetry.addData("Left Front Motor Encoder = ", robot.motorLF.getCurrentPosition());
-            telemetry.addData("Left Front Motor Current = ", robot.motorLF.getCurrent(CurrentUnit.AMPS));
-            telemetry.addData("Left Rear Motor Encoder = ", robot.motorLR.getCurrentPosition());
-            telemetry.addData("Left Rear Motor Current = ", robot.motorLR.getCurrent(CurrentUnit.AMPS));
-            telemetry.addData("Right Front Motor Encoder = ", robot.motorRF.getCurrentPosition());
-            telemetry.addData("Right Front Motor Current = ", robot.motorRF.getCurrent(CurrentUnit.AMPS));
-            telemetry.addData("Right Rear Motor Encoder = ", robot.motorRR.getCurrentPosition());
-            telemetry.addData("Right Rear Motor Current = ", robot.motorRR.getCurrent(CurrentUnit.AMPS));
-            telemetry.addData("TestPosition = ", testPosition);
-            telemetry.addData("Status", "Running");
-            telemetry.addData("Left Power", leftPower);
-            telemetry.addData("Right Power", rightPower);
-            telemetry.addData("Lift set point", mBase);
-            telemetry.addData("Angle set point", aBase);
-            telemetry.update();
+        telemetry.addData("Left Front Motor Encoder = ", robot.motorLF.getCurrentPosition());
+        telemetry.addData("Left Front Motor Current = ", robot.motorLF.getCurrent(CurrentUnit.AMPS));
+        telemetry.addData("Left Rear Motor Encoder = ", robot.motorLR.getCurrentPosition());
+        telemetry.addData("Left Rear Motor Current = ", robot.motorLR.getCurrent(CurrentUnit.AMPS));
+        telemetry.addData("Right Front Motor Encoder = ", robot.motorRF.getCurrentPosition());
+        telemetry.addData("Right Front Motor Current = ", robot.motorRF.getCurrent(CurrentUnit.AMPS));
+        telemetry.addData("Right Rear Motor Encoder = ", robot.motorRR.getCurrentPosition());
+        telemetry.addData("Right Rear Motor Current = ", robot.motorRR.getCurrent(CurrentUnit.AMPS));
+        telemetry.addData("TestPosition = ", testPosition);
+        telemetry.addData("Status", "Running");
+        telemetry.addData("Left Power", leftPower);
+        telemetry.addData("Right Power", rightPower);
+        telemetry.addData("Lift set point", mBase);
+        telemetry.addData("Angle set point", aBase);
+        telemetry.update();
         }
     }
-    public void CLIMB(){
+
+    public void CLIMB() {
         robot.motorLift.setPower(1);
         robot.motorLiftRight.setPower(1);
         robot.motorLEFT.setPower(1);
@@ -394,10 +398,10 @@ public class RobotTeleOp extends LinearOpMode {
         sleep(1000);
         robot.motorLEFT.setTargetPosition(0);
         robot.motorRIGHT.setTargetPosition(0);
-
     }
 
-    public void resetEncoders(){
+
+    public void resetEncoders() {
         boolean extensionRetraction = false;
         boolean angleRetraction = false;
         int extensionPosition = 0;
@@ -408,9 +412,11 @@ public class RobotTeleOp extends LinearOpMode {
         retractionTime.reset();
         robot.motorLift.setPower(0.75);
         robot.motorLiftRight.setPower(0.75);
+        robot.motorLEFT.setPower(0.5);
+        robot.motorRIGHT.setPower(0.5);
 
-        while (opModeIsActive() && !extensionRetraction){
-            if(robot.motorLift.getCurrent(CurrentUnit.AMPS) > 5){
+        while (opModeIsActive() && !extensionRetraction) {
+            if (robot.motorLift.getCurrent(CurrentUnit.AMPS) > 5) {
                 robot.motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorLift.setTargetPosition(0);
                 robot.motorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -425,23 +431,25 @@ public class RobotTeleOp extends LinearOpMode {
             }
         }
 
-        while (opModeIsActive() && !angleRetraction){
-            if(robot.motorLEFT.getCurrent(CurrentUnit.AMPS) > 5){
+        while (opModeIsActive() && !angleRetraction) {
+            if (robot.motorLEFT.getCurrent(CurrentUnit.AMPS) > 2.5) {
                 robot.motorLEFT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorLEFT.setTargetPosition(0);
                 robot.motorLEFT.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.motorRIGHT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorRIGHT.setTargetPosition(0);
                 robot.motorRIGHT.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                extensionRetraction = true;
+                angleRetraction = true;
             } else {
                 anglePosition = anglePosition - 20;
                 robot.motorLEFT.setTargetPosition(anglePosition);
                 robot.motorRIGHT.setTargetPosition(anglePosition);
             }
         }
-
-
     }
 
 }
+
+
+
+
