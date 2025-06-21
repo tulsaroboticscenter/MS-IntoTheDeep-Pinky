@@ -67,7 +67,7 @@ public class MSParams {
     public final int ANGLE_MAX_HIGH =1372;
     public final int ANGLE_MIN_LOW = 10;
     public final int ANGLE_Climb =1320;
-    public final int ANGLE_High_Bucket = 1309;
+    public final int ANGLE_High_Bucket = 1123;
     public final int ANGLE_START = 0;
     public final int ANGLE_AUTO=20;
     public final int ANGLE_SWEEP=10;
@@ -85,6 +85,7 @@ public class MSParams {
     //twist camands
     public final double TWIST_HORIZONTAL = 0;
     public final double TWIST_VERTICAL = 0.6;
+    public final double TWIST_HALF = 0.3;
 
     //Specimen claw
     public final double SPICE_OPEN = 0.3;

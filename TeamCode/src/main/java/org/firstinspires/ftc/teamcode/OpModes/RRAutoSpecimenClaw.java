@@ -105,6 +105,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         Pose2d yellowSample2Position = new Pose2d(0, 0, 0);
         Pose2d yellowSample3Position = new Pose2d(0, 0, 0);
         Pose2d midwayPose0 = new Pose2d(0, 0, 0);
+        Pose2d midwayPose05 = new Pose2d(0, 0, 0);
         Pose2d midwayPose1 = new Pose2d(0, 0, 0);
         Pose2d Sweep3 = new Pose2d(0, 0, 0);
         Pose2d midwayPose2 = new Pose2d(0, 0, 0);
@@ -121,22 +122,23 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
          * Set values for RoadRunner Pathing
          */
         specimenPrePreScoringPosition= new Pose2d(10, 5, Math.toRadians(45));//old
-        specimenPreScoringPosition = new Pose2d(20, 10, Math.toRadians(0));
-        specimenScoringPosition = new Pose2d(25, 18, 0);
-        specimenScoringSlide = new Pose2d(24, -15, 0);
-        grabSpecimenPosition = new Pose2d(6, -23, Math.toRadians(0));
+        specimenPreScoringPosition = new Pose2d(15, 11, Math.toRadians(0));
+        specimenScoringPosition = new Pose2d(25, 11, 0);
+        specimenScoringSlide = new Pose2d(25, 15, 0);
+        grabSpecimenPosition = new Pose2d(1, -24, Math.toRadians(0));
         coloredSample1Position = new Pose2d(5, 30, Math.toRadians(90));
         coloredSample2Position = new Pose2d(35, 58, 90);
         coloredSample3Position = new Pose2d(35, 60, Math.toRadians(90));
-        midwayPose0 = new Pose2d(10, -15, Math.toRadians(-45)); //Before first pick old
-        midwayPose1 = new Pose2d(28, -15, Math.toRadians(-45)); //pick close to wall 35 .-27
-        Sweep3 = new Pose2d(32.7, -21, Math.toRadians(-45));
-        midwayPose2 = new Pose2d(21.6, -22, Math.toRadians(-45)); //pick middle 25  .-27
-        Sweep2 = new Pose2d(27.5, -14, Math.toRadians(-135));
-        midwayPose3 = new Pose2d(15.6, -10, Math.toRadians(-45));//pick first 15
-        Sweep1 = new Pose2d(21.84, -9, Math.toRadians(-135));
+        midwayPose0 = new Pose2d(14, -21, Math.toRadians(0)); //Before first pick old
+        midwayPose05 = new Pose2d(50, -21, 0);
+        midwayPose1= new Pose2d(50, -30, Math.toRadians(0));//pick first 15
+        Sweep1 = new Pose2d(9.5, -31, Math.toRadians(0));
+        midwayPose2 = new Pose2d(50, -41.5, Math.toRadians(0)); //pick middle 25  .-27
+        Sweep2 = new Pose2d(7.5, -41.5, Math.toRadians(0));
+        midwayPose3 = new Pose2d(50, -49, Math.toRadians(0)); //pick close to wall 35 .-27
+        Sweep3 = new Pose2d(7.7, -49, Math.toRadians(0));
 
-        parkPose = new Pose2d(0, -35, Math.toRadians(0));
+        parkPose = new Pose2d(0, -35, Math.toRadians(-95));
 
         // Raise Arm to high bar scoring position
 
@@ -154,7 +156,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         telemetry.update();
 
         if (opModeIsActive()) mechOps.SpiceScore2();
-        sleep(1000);
+        //sleep(1000);
         // Drive to specimen scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -173,7 +175,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
                         .strafeToLinearHeading(specimenPreScoringPosition.position, specimenPreScoringPosition.heading)
                         .build());
         if (opModeIsActive()) mechOps.openClaw();
-        sleep(1000);
+        //sleep(1000);
         // TODO: Add code to release the sample and lower the arm
         if (opModeIsActive())mechOps.armin();
         if (opModeIsActive()) mechOps.openClaw();
@@ -198,50 +200,60 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
                 drive.actionBuilder(drive.pose)
                        // .strafeToLinearHeading(specimenPreScoringPosition.position,specimenPreScoringPosition.heading)
                         .strafeToLinearHeading(midwayPose0.position, midwayPose0.heading)
-                        .build());
-        if (opModeIsActive()) mechOps.anglePosition(params.ANGLE_SWEEP);
-        if (opModeIsActive()) mechOps.armout();
-        if (opModeIsActive()) mechOps.PreSweep();
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
-                        .build());
-        if (opModeIsActive()) mechOps.Sweep();
-        //Turn to Sample 1 Drop
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(midwayPose05.position,midwayPose05.heading)
+                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                         .strafeToLinearHeading(Sweep1.position, Sweep1.heading)
                         .build());
 
-
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+//                        .build());
+        //if (opModeIsActive()) mechOps.Sweep();
+        //Turn to Sample 1 Drop
+//
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(Sweep1.position, Sweep1.heading)
+//                        .build());
         //Turn to Sample Pick 2
-        if (opModeIsActive()) mechOps.PreSweep();
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
-                        .build());
-        if (opModeIsActive()) mechOps.Sweep();
-        //Turn to Sample 2 Drop
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(Sweep2.position, Sweep2.heading)
-                        .build());
-        if (opModeIsActive()) mechOps.PreSweep();
-
-        //Turn to Sample Pick 3
+      //  if (opModeIsActive()) mechOps.PreSweep();
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
+                        .strafeToLinearHeading(Sweep2.position, Sweep2.heading)
                         .build());
-        if (opModeIsActive()) mechOps.Sweep();
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
+//                        .build());
+       // if (opModeIsActive()) mechOps.Sweep();
+        //Turn to Sample 2 Drop
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(Sweep2.position, Sweep2.heading)
+//                        .build());
+       // if (opModeIsActive()) mechOps.PreSweep();
+
+        /*Turn to Sample Pick 3
+        *
+        *
+         */
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
+//                        .strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
+//                        .strafeToLinearHeading(Sweep3.position, Sweep3.heading)
+//
+//                        .build());
+       // if (opModeIsActive()) mechOps.Sweep();
 
         //Turn to Sample 3 Drop
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(Sweep3.position, Sweep3.heading)
-                        .build());
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(Sweep3.position, Sweep3.heading)
+//                        .build());
 
         if (opModeIsActive()) mechOps.WallGrab();
         // Grab the specimen 2

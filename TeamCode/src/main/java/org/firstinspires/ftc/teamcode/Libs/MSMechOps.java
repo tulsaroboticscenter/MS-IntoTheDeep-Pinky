@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.Libs;
 
+import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile2;
@@ -140,36 +143,40 @@ public class MSMechOps {
        // robot.servoBar.setPosition(params.Bar_Auto);
        // opMode.sleep(300);
         anglePosition(params.ANGLE_High_Bucket);
+        safeWaitSeconds(1.5);
         liftPosition(params.LIFT_MAX_HIGH);
-        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        robot.servoTwist.setPosition(params.TWIST_VERTICAL);
         robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
         robot.servoExtend.setPosition(params.Extend_OUT);
         robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        opMode.sleep(1000);
+        //opMode.sleep(1000);
     }
     public void AutoDumpDown() {
         // robot.servoWrist.setPosition(params.Wrist_Release);
 
         // robot.servoBar.setPosition(params.Bar_Auto);
         // opMode.sleep(300);
-        robot.servoClaw.setPosition(params.CLAW_OPEN);
+        //robot.servoClaw.setPosition(params.CLAW_OPEN);
+
         liftPosition(params.LIFT_MIN_LOW);
-        opMode.sleep(1000);
+
+        safeWaitSeconds(2);
         anglePosition(params.ANGLE_Floor);
-        liftPosition(params.LIFT_MIN_LOW);
+
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-        robot.servoExtend.setPosition(params.Extend_OUT);
-        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_DOWN);
-        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_DOWN);
-        opMode.sleep(1000);
+        robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
+        robot.servoExtend.setPosition(params.Extend_FLOOR);
+        robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
+        robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
+
+        safeWaitSeconds(1);
 
     }
     public void AutoSubPark(){
         robot.servoSpice.setPosition(params.SPICE_CLOSE);
         liftPosition(params.LIFT_Auto_Park);
-        opMode.sleep(1500);
+        safeWaitSeconds(1.5);
     }
 
     public void WallGrab(){
@@ -198,5 +205,11 @@ public class MSMechOps {
         robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
         robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);
         robot.servoClawRotation2.setPosition(params.CLAWROTATION2_FLOOR);
+    }
+    public void safeWaitSeconds(double time) {
+        ElapsedTime timer = new ElapsedTime(SECONDS);
+        timer.reset();
+        while ( timer.time() < time) {
+        }
     }
 }
