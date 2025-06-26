@@ -108,8 +108,8 @@ public class RRPinkyBucket extends LinearOpMode{
          * Set values for RoadRunner Pathing
          */
 
-        samplePreScoringPosition = new Pose2d(-13.6, -8, Math.toRadians(-45));
-        sampleScoringPosition = new Pose2d(17, -7, Math.toRadians(45));
+        samplePreScoringPosition = new Pose2d(5, -15, Math.toRadians(45));
+        sampleScoringPosition = new Pose2d(10, -13, Math.toRadians(45));
         yellowSample1Position = new Pose2d(12, -18, Math.toRadians(-90));
         yellowSample2Position = new Pose2d(22, -18, Math.toRadians(-90));
         yellowSample3Position = new Pose2d(19, -18, Math.toRadians(-45));
@@ -128,7 +128,7 @@ public class RRPinkyBucket extends LinearOpMode{
         // Drive to specimen scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        //   .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
+                        .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 

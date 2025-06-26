@@ -56,18 +56,19 @@ public class MSParams {
     public final int LIFT_Auto_Park =910;
     public final int LIFT_WALL = 0;
     public final int LIFT_OUT =2468;
-    public final int LIFT_CLIMB =1000;
+    public final int LIFT_CLIMB =980;
     //1335 a780
     // ARM LIFTS
 
-    public final double ANGLE_POWER = 0.5;
+    public final double ANGLE_POWER = 0.75;
     public final int ANGLE_Wall = 1111;
-    public final int ANGLE_Sub_High = 780;
-    public final int ANGLE_Floor = 20;
+    public final int ANGLE_Sub_High = 780; //780
+    public final int ANGLE_Floor = 10;
+
     public final int ANGLE_MAX_HIGH =1372;
     public final int ANGLE_MIN_LOW = 10;
-    public final int ANGLE_Climb =1320;
-    public final int ANGLE_High_Bucket = 1123;
+    public final int ANGLE_Climb =1330;
+    public final int ANGLE_High_Bucket = 1300;
     public final int ANGLE_START = 0;
     public final int ANGLE_AUTO=20;
     public final int ANGLE_SWEEP=10;

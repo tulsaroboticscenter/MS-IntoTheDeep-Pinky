@@ -217,6 +217,16 @@ public class RobotTeleOp extends LinearOpMode {
                 CLIMB();
             }
 
+            if (gamepad1.dpad_left) {
+                mBase = params.LIFT_RESET;
+
+            }
+            if (gamepad1.dpad_right) {
+                aBase=aBase+10;
+
+            }
+
+
             if (gamepad1.right_bumper) {
                 if ((buttonPressTimer.time() > 0.25) && clawOpen) {
                     clawPosition = params.CLAW_CLOSE;
@@ -391,7 +401,7 @@ public class RobotTeleOp extends LinearOpMode {
         robot.motorLiftRight.setTargetPosition(params.LIFT_CLIMB);
         robot.motorLEFT.setTargetPosition(params.ANGLE_Climb);
         robot.motorRIGHT.setTargetPosition(params.ANGLE_Climb);
-        sleep(1000);
+        sleep(1500);
         // climb
         robot.motorLift.setTargetPosition(0);
         robot.motorLiftRight.setTargetPosition(0);
@@ -416,7 +426,7 @@ public class RobotTeleOp extends LinearOpMode {
         robot.motorRIGHT.setPower(0.5);
 
         while (opModeIsActive() && !extensionRetraction) {
-            if (robot.motorLift.getCurrent(CurrentUnit.AMPS) > 5) {
+            if (robot.motorLift.getCurrent(CurrentUnit.AMPS) > 3) {
                 robot.motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorLift.setTargetPosition(0);
                 robot.motorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -432,7 +442,7 @@ public class RobotTeleOp extends LinearOpMode {
         }
 
         while (opModeIsActive() && !angleRetraction) {
-            if (robot.motorLEFT.getCurrent(CurrentUnit.AMPS) > 2.5) {
+            if (robot.motorLEFT.getCurrent(CurrentUnit.AMPS) > 1) {
                 robot.motorLEFT.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorLEFT.setTargetPosition(0);
                 robot.motorLEFT.setMode(DcMotor.RunMode.RUN_TO_POSITION);

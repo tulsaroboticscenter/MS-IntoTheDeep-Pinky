@@ -125,7 +125,7 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
         specimenPreScoringPosition = new Pose2d(15, 11, Math.toRadians(0));
         specimenScoringPosition = new Pose2d(25, 11, 0);
         specimenScoringSlide = new Pose2d(25, 15, 0);
-        grabSpecimenPosition = new Pose2d(1, -24, Math.toRadians(0));
+        grabSpecimenPosition = new Pose2d(3, -24, Math.toRadians(0));
         coloredSample1Position = new Pose2d(5, 30, Math.toRadians(90));
         coloredSample2Position = new Pose2d(35, 58, 90);
         coloredSample3Position = new Pose2d(35, 60, Math.toRadians(90));
@@ -292,12 +292,13 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
                         .build());
         if (opModeIsActive()) mechOps.openClaw();
         //          Lower Lift
-        if (opModeIsActive()) mechOps.WallGrab();
+
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
                         .build());
-
+        safeWaitSeconds(0.5);
+        if (opModeIsActive()) mechOps.WallGrab();
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .turnTo(Math.toRadians(0))
@@ -329,12 +330,15 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
                         .build());
         if (opModeIsActive()) mechOps.openClaw();
 
-        if (opModeIsActive()) mechOps.WallGrab();
+
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
                         .build());
+
+        safeWaitSeconds(0.5);
+        if (opModeIsActive()) mechOps.WallGrab();
 
 //here to stop 4th Spec
         Actions.runBlocking(
@@ -368,7 +372,12 @@ public class RRAutoSpecimenClaw extends LinearOpMode{
 
         if (opModeIsActive()) safeWaitSeconds(0.25);
         if (opModeIsActive()) mechOps.openClaw();
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenPreScoringPosition.position, specimenPreScoringPosition.heading)
+                        .build());
 
+        safeWaitSeconds(1);
         if (opModeIsActive()) mechOps.raiseLift(params.LIFT_MIN_LOW);
         if (opModeIsActive()) mechOps.armout();
 
