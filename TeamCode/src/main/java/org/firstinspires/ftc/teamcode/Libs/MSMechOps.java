@@ -143,7 +143,7 @@ public class MSMechOps {
        // robot.servoBar.setPosition(params.Bar_Auto);
        // opMode.sleep(300);
         anglePosition(params.ANGLE_High_Bucket);
-        safeWaitSeconds(1.5);
+        safeWaitSeconds(1);
         liftPosition(params.LIFT_MAX_HIGH);
         robot.servoTwist.setPosition(params.TWIST_VERTICAL);
         robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
@@ -161,10 +161,10 @@ public class MSMechOps {
 
         liftPosition(params.LIFT_MIN_LOW);
 
-        safeWaitSeconds(2);
+        safeWaitSeconds(0.01);
         anglePosition(params.ANGLE_Floor);
 
-        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoExtendRight.setPosition(params.ExtendRight_FLOOR);
         robot.servoExtend.setPosition(params.Extend_FLOOR);
         robot.servoClawRotation1.setPosition(params.CLAWROTATION1_FLOOR);

@@ -74,7 +74,10 @@ public class RRPinkyBucket extends LinearOpMode{
 
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-
+        robot.motorLift.setPower(1);
+        robot.motorLiftRight.setPower(1);
+        robot.motorLEFT.setPower(0.6);
+        robot.motorRIGHT.setPower(0.6);
 
         while (!isStopRequested() && !opModeIsActive()) {
             // Wait for the DS start button to be touched.
@@ -109,10 +112,10 @@ public class RRPinkyBucket extends LinearOpMode{
          */
 
         samplePreScoringPosition = new Pose2d(5, -15, Math.toRadians(45));
-        sampleScoringPosition = new Pose2d(10, -13, Math.toRadians(45));
-        yellowSample1Position = new Pose2d(12, -18, Math.toRadians(-90));
-        yellowSample2Position = new Pose2d(22, -18, Math.toRadians(-90));
-        yellowSample3Position = new Pose2d(19, -18, Math.toRadians(-45));
+        sampleScoringPosition = new Pose2d(20, -3, Math.toRadians(45));
+        yellowSample1Position = new Pose2d(13, -22, Math.toRadians(-90));
+        yellowSample2Position = new Pose2d(24, -20, Math.toRadians(-90));
+        yellowSample3Position = new Pose2d(23, -28, Math.toRadians(-45));
         parkPrepPose = new Pose2d(-16,-50 , Math.toRadians(180));
         parkPose = new Pose2d(-11, -51, Math.toRadians(180));
 
@@ -128,16 +131,14 @@ public class RRPinkyBucket extends LinearOpMode{
         // Drive to specimen scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
+                        //.strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 
         //score sample
-        if (opModeIsActive()) robot.servoTwist.setPosition(params.TWIST_VERTICAL);
-        safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_OPEN);
         safeWaitSeconds(0.5);
-
+        mechOps.liftPosition(params.LIFT_MIN_LOW);
         //pick sample 1
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -145,6 +146,7 @@ public class RRPinkyBucket extends LinearOpMode{
                         .build());
 
         //Transfer
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         if (opModeIsActive()) mechOps.AutoDumpDown();
         safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
@@ -163,7 +165,7 @@ public class RRPinkyBucket extends LinearOpMode{
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_OPEN);
         safeWaitSeconds(0.5);
 
-
+        mechOps.liftPosition(params.LIFT_MIN_LOW);
         //pick sample 1
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -171,7 +173,10 @@ public class RRPinkyBucket extends LinearOpMode{
                         .build());
 
         //Transfer
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         if (opModeIsActive()) mechOps.AutoDumpDown();
+
+        safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
         //drive to scoring
         if (opModeIsActive()) mechOps.AutoDumpUp();
@@ -188,7 +193,7 @@ public class RRPinkyBucket extends LinearOpMode{
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_OPEN);
         safeWaitSeconds(0.5);
 
-
+        mechOps.liftPosition(params.LIFT_MIN_LOW);
         //pick sample 3
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -196,8 +201,10 @@ public class RRPinkyBucket extends LinearOpMode{
                         .build());
 
         //Transfer
-        if (opModeIsActive()) mechOps.AutoDumpDown();
         if (opModeIsActive()) robot.servoTwist.setPosition(params.TWIST_HALF);
+        if (opModeIsActive()) mechOps.AutoDumpDown();
+
+        safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.servoClaw.setPosition(params.CLAW_CLOSE);
         //drive to scoring
         if (opModeIsActive()) mechOps.AutoDumpUp();
